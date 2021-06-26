@@ -9,7 +9,7 @@ public class User{
    //   this.name = name;
  //  }//constructor
    
-   public String getUserName(){
+   public String getUsername(){
       return this.username;
    }
    

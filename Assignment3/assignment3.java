@@ -6,7 +6,7 @@ public class assignment3{
    //UserService
       UserService userService = new UserService();
    //user array
-      User[] arr_user = new User[100];
+      User[] arr_user = new User[4];
 
    //fileio
    		BufferedReader fileReader = null;
@@ -28,7 +28,7 @@ public class assignment3{
 			e.printStackTrace();
 		} finally {
 			try {
-				System.out.println("Closing file reader");
+				//System.out.println("Closing file reader");
 				fileReader.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -36,12 +36,18 @@ public class assignment3{
 		}
       //scanner
       Scanner scanner = new Scanner(System.in);
-      for(int i = 0; i < 5; i++){
+      
+      boolean bool = true;
+      while(bool){
+         System.out.println(arr_user[3].getUsername());
          System.out.print("Enter Your email: ");
          String userName = scanner.nextLine();
          
          System.out.print("Enter Your password: ");
          String password = scanner.nextLine();
+         
+        
+         
       }
       
       scanner.close();

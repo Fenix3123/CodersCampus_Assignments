@@ -36,20 +36,35 @@ public class assignment3{
 		}
       //scanner
       Scanner scanner = new Scanner(System.in);
-      
+      //int index = 0;
       boolean bool = true;
-      while(bool){
-         System.out.println(arr_user[3].getUsername());
-         System.out.print("Enter Your email: ");
-         String userName = scanner.nextLine();
+      for(int i = 0; i < 5; i++){
          
-         System.out.print("Enter Your password: ");
+         System.out.println("Enter Your email: ");
+         String username = scanner.nextLine();
+         username = username.toUpperCase();
+         
+         System.out.println("Enter Your password: ");
          String password = scanner.nextLine();
+          
          
+         for(int index = 0; index < arr_user.length; index++){
+            if(arr_user[index].getUsername().toUpperCase().equals(username) && arr_user[index].getPassword().equals(password)){
+               System.out.println("Welcome: "+ arr_user[index].getName());
+               System.exit(0);
+            }else{
+               
+            }
+         }//end of inside for loop
+         
+        System.out.println();
+
+        System.out.println("Invalid login, please try again");
         
+        System.out.println();
          
-      }
-      
+      }//end of for loop
+      System.out.println("Too many failed login attempts, you are now locked out.");
       scanner.close();
       
       
@@ -57,4 +72,4 @@ public class assignment3{
 
       
    }
-}
+}//end class

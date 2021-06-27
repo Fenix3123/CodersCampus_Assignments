@@ -37,7 +37,7 @@ public class assignment3{
       //scanner
       Scanner scanner = new Scanner(System.in);
       //int index = 0;
-      boolean bool = true;
+      //boolean bool = true;
       for(int i = 0; i < 5; i++){
          
          System.out.println("Enter Your email: ");

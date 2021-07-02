@@ -102,9 +102,10 @@ public class assignment4{
                                  }else if(choice.equals("4")){
                                     Arrays.sort(arr_user);
                                     try {
-			                              writer = new BufferedWriter(new FileWriter("data.txt"));
+			                              writer = new BufferedWriter(new FileWriter("users.txt"));
                                        for(User user : arr_user){
-			                                  writer.write(user.getUsername()+", "+user.getPassword()+", "+user.getName()+", "+user.getRole()+", ");
+			                                  writer.write(user.getUsername()+", "+user.getPassword()+", "+user.getName()+", "+user.getRole());
+                                             writer.newLine();
                                              }
 		                                  } finally {
 			                                       if (writer != null) writer.close();
@@ -147,9 +148,10 @@ public class assignment4{
                   }else if(choice.equals("4")){
                      Arrays.sort(arr_user);
                      try {
-			                  writer = new BufferedWriter(new FileWriter("data.txt"));
+			                  writer = new BufferedWriter(new FileWriter("users.txt"));
                            for(User user : arr_user){
 			                        writer.write(user.getUsername()+", "+user.getPassword()+", "+user.getName()+", "+user.getRole());
+                                 writer.newLine();
                               }	
 		                    } finally {
 			                      if (writer != null) writer.close();

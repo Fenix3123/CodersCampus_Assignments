@@ -40,7 +40,7 @@ public class User implements Comparable<User>{
    }
    
    public void setRole(String str){
-      this.role = role;
+      this.role = str;
    }
    
    public int compareTo(User that) {

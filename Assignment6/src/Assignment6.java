@@ -22,20 +22,27 @@ public class Assignment6 {
 	List <CarSales> modelSList = readfile("./modelS.csv");
 	List <CarSales> modelXList = readfile("./modelX.csv");
 	
+	
 //	model3List.stream()
 //	  .forEach(p -> System.out.println(p.getSale()));
 	
 	Map<String, List<CarSales>> groupedByDate = model3List.stream()
 								.collect(Collectors.groupingBy(info -> info.getYear()));
 	
-	Set<Entry<String, List<CarSales>>> entryCarSales = groupedByDate.entrySet();
+	Set<Entry<String, List<CarSales>>> model3entry = groupedByDate.entrySet();
+	
+	List <String> model3Str = model3entry.stream()
+											.map(car -> car.getKey())
+	 			 							.filter(year -> year.startsWith("17"))
+	 			 							.collect(Collectors.toList());
+	
+	System.out.println(model3entry.);
 	
 	
-	entryCarSales.stream()
-				 .forEach((entry)-> {
-					 
-				 System.out.println(entry.getKey() + " - > "+ entry.getValue());
-				 });
+//	entryCarSales.stream()
+//				 .forEach((entry)-> { 
+//					 System.out.println(entry.getKey() + " - > "+ entry.getValue().get(0).getYear());
+//				 });
 //	
 //	System.out.println("Model 3 Yearly Sales Report");
 //	System.out.println("---------------------------");

@@ -4,12 +4,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 
@@ -22,33 +25,67 @@ public class Assignment6 {
 	List <CarSales> modelSList = readfile("./modelS.csv");
 	List <CarSales> modelXList = readfile("./modelX.csv");
 	
+
 	
-//	model3List.stream()
-//	  .forEach(p -> System.out.println(p.getSale()));
+	
+
+	
+
 	
 	Map<String, List<CarSales>> groupedByDate = model3List.stream()
 								.collect(Collectors.groupingBy(info -> info.getYear()));
 	
 	Set<Entry<String, List<CarSales>>> model3entry = groupedByDate.entrySet();
 	
-	List <String> model3Str = model3entry.stream()
-											.map(car -> car.getKey())
-	 			 							.filter(year -> year.startsWith("17"))
-	 			 							.collect(Collectors.toList());
-	
-	System.out.println(model3entry.);
 	
 	
-//	entryCarSales.stream()
-//				 .forEach((entry)-> { 
-//					 System.out.println(entry.getKey() + " - > "+ entry.getValue().get(0).getYear());
-//				 });
-//	
-//	System.out.println("Model 3 Yearly Sales Report");
-//	System.out.println("---------------------------");
-//	System.out.println("2017 -> ####");
-//	System.out.println("2018 -> ####");
-//	System.out.println("2019 -> ####");
+	
+				CarSales model3info = model3entry.stream()
+												 .map(p -> p.getValue())
+												 .flatMap(sales -> sales.stream())
+					 			 				 .filter(sales -> sales.getYear().startsWith("17"))
+												 .max((CarSales o1, CarSales o2)-> o1.getSale().compareTo(o2.getSale()));
+				                             
+
+			System.out.println(model3info);
+	
+	//getting total sales for model 3
+	int model3Sale17 = model3entry.stream()
+	 			 				  .map(p -> p.getValue())
+	 			 				  .flatMap(sales -> sales.stream())
+	 			 				  .filter(sales -> sales.getYear().startsWith("17"))
+	 			 				  .mapToInt(sales -> sales.getSale())
+	 			 				  .sum();
+	
+	int model3Sale18 = model3entry.stream()
+								  .map(p -> p.getValue())
+								  .flatMap(sales -> sales.stream())
+									.filter(sales -> sales.getYear().startsWith("18"))
+									.mapToInt(sales -> sales.getSale())
+									.sum();
+	
+	int model3Sale19 = model3entry.stream()
+								  .map(p -> p.getValue())
+								  .flatMap(sales -> sales.stream())
+								  .filter(sales -> sales.getYear().startsWith("19"))
+								  .mapToInt(sales -> sales.getSale())
+								  .sum();
+	
+
+				
+
+	 			 						 
+	 			 							
+	
+	
+	
+	
+
+	System.out.println("Model 3 Yearly Sales Report");
+	System.out.println("---------------------------");
+	System.out.println("2017 -> " + model3Sale17);
+	System.out.println("2018 -> " + model3Sale18);
+	System.out.println("2019 -> " + model3Sale19);
 	
 //	int num = model3List.stream()
 //			  .map(p -> p.getSale())

@@ -6,8 +6,12 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+
 
 
 
@@ -24,7 +28,14 @@ public class Assignment6 {
 	Map<String, List<CarSales>> groupedByDate = model3List.stream()
 								.collect(Collectors.groupingBy(info -> info.getYear()));
 	
-	System.out.println(groupedByDate);
+	Set<Entry<String, List<CarSales>>> entryCarSales = groupedByDate.entrySet();
+	
+	
+	entryCarSales.stream()
+				 .forEach((entry)-> {
+					 
+				 System.out.println(entry.getKey() + " - > "+ entry.getValue());
+				 });
 //	
 //	System.out.println("Model 3 Yearly Sales Report");
 //	System.out.println("---------------------------");

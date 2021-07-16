@@ -73,6 +73,6 @@ public class Assignment6 {
 			}
 		}
 		return carSaleList;
-	}
+	}//end of readfile method
 
-}
+}//end of class

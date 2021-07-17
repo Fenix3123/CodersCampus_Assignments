@@ -78,9 +78,9 @@ public class Assignment6 {
 	int model3Sale18 = model3entry.stream()
 								  .map(p -> p.getValue())
 								  .flatMap(sales -> sales.stream())
-									.filter(sales -> sales.getYear().startsWith("18"))
-									.mapToInt(sales -> sales.getSale())
-									.sum();
+								  .filter(sales -> sales.getYear().startsWith("18"))
+								  .mapToInt(sales -> sales.getSale())
+								  .sum();
 	
 	int model3Sale19 = model3entry.stream()
 								  .map(p -> p.getValue())

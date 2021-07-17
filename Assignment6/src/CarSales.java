@@ -2,7 +2,7 @@
 public class CarSales {
 	private String year;
 	private String month;
-	private int sale;
+	private Integer sale;
 	
 	public String getYear() {
 		return year;
@@ -28,7 +28,7 @@ public class CarSales {
 		this.sale = sale;
 	}
 	//constructor
-	public CarSales(String year, String month, int sale) {
+	public CarSales(String year, String month, Integer sale) {
 		this.year = year;
 		this.month = month;
 		this.sale = sale;

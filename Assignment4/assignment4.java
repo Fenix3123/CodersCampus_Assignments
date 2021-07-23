@@ -63,6 +63,48 @@ public class assignment4{
                System.out.println("----------");
                
                //where the real assignment 4 begins
+               if(arr_user[index].getRole().equals("normal_user")){
+                  while(true){
+        
+                     System.out.println("(0) Update username");
+                     System.out.println("(1) Update password");
+                     System.out.println("(2) Update name");
+                     System.out.println("(3) Exit");
+                     String choice = scanner.nextLine();
+                     
+                     if(choice.equals("0")){
+                        System.out.println("What do you want your new username to be?");
+                        String new_username = scanner.nextLine();
+                        arr_user[index].setUsername(new_username);
+                     }else if(choice.equals("1")){
+                              System.out.println("What do you want your new password to be?");
+                              String new_password = scanner.nextLine();
+                              arr_user[index].setPassword(new_password);
+      
+                     }else if(choice.equals("2")){
+                               System.out.println("What do you want your new Name to be?");
+                               String new_name = scanner.nextLine();
+                               arr_user[index].setName(new_name);
+                     }else if(choice.equals("3")){
+                                Arrays.sort(arr_user);
+                                   try {
+   			                        writer = new BufferedWriter(new FileWriter("users.txt"));
+                                     for(User user : arr_user){
+   			                             writer.write(user.getUsername()+", "+user.getPassword()+", "+user.getName()+", "+user.getRole());
+                                           writer.newLine();
+                                         }
+   		                             } finally {
+   			                                  if (writer != null) writer.close();
+   		                             }
+   
+                                       System.exit(0);
+                      }else{
+                               System.out.println("Please try again");
+                      }
+
+                  }//end of while for normal user
+               
+               }
                while(true){
                   System.out.println("(0) Log in as another user");
                   System.out.println("(1) Update username");
@@ -74,55 +116,58 @@ public class assignment4{
                   if(choice.equals("0")){
                      if(arr_user[index].getRole().equals("super_user")){
                         while(true){
+
                            System.out.println("Which user would you like to login as? (Type in a valid username)");
                            String diff_user = scanner.nextLine();
+                           diff_user = diff_user.toUpperCase();
                            
-                           if(arr_user[index].getUsername().toUpperCase().equals(diff_user)){
-                              while(true){
-                                 System.out.println("(1) Update username");
-                                 System.out.println("(2) Update password");
-                                 System.out.println("(3) Update name");
-                                 System.out.println("(4) Exit");
-                                 String _choice = scanner.nextLine();
-                                 
-                                 if(choice.equals("1")){
-                                    System.out.println("What do you want your new username to be?");
-                                    String new_username = scanner.nextLine();
-                                    arr_user[index].setUsername(new_username);
+                           for(index = 0; index < arr_user.length; index++){
+                              if(arr_user[index].getUsername().toUpperCase().equals(diff_user)){
+                                 while(true){
+                                    System.out.println("Welcome: "+ arr_user[index].getName());
+                                    System.out.println("----------");
+
+                                    System.out.println("(1) Update username");
+                                    System.out.println("(2) Update password");
+                                    System.out.println("(3) Update name");
+                                    System.out.println("(4) Exit");
+                                    String _choice = scanner.nextLine();
+                                    
+                                    if(_choice.equals("1")){
+                                       System.out.println("What do you want your new username to be?");
+                                       String new_username = scanner.nextLine();
+                                       arr_user[index].setUsername(new_username);
+      
+                                    }else if(_choice.equals("2")){
+                                       System.out.println("What do you want your new password to be?");
+                                       String new_password = scanner.nextLine();
+                                       arr_user[index].setPassword(new_password);
+      
+                                    }else if(_choice.equals("3")){
+                                       System.out.println("What do you want your new Name to be?");
+                                       String new_name = scanner.nextLine();
+                                       arr_user[index].setName(new_name);
+                                    }else if(_choice.equals("4")){
+                                       Arrays.sort(arr_user);
+                                       try {
+   			                              writer = new BufferedWriter(new FileWriter("users.txt"));
+                                          for(User user : arr_user){
+   			                                  writer.write(user.getUsername()+", "+user.getPassword()+", "+user.getName()+", "+user.getRole());
+                                                writer.newLine();
+                                                }
+   		                                  } finally {
+   			                                       if (writer != null) writer.close();
+   		                                   }
    
-                                 }else if(choice.equals("2")){
-                                    System.out.println("What do you want your new password to be?");
-                                    String new_password = scanner.nextLine();
-                                    arr_user[index].setPassword(new_password);
-   
-                                 }else if(choice.equals("3")){
-                                    System.out.println("What do you want your new Name to be?");
-                                    String new_name = scanner.nextLine();
-                                    arr_user[index].setName(new_name);
-                                 }else if(choice.equals("4")){
-                                    Arrays.sort(arr_user);
-                                    try {
-			                              writer = new BufferedWriter(new FileWriter("users.txt"));
-                                       for(User user : arr_user){
-			                                  writer.write(user.getUsername()+", "+user.getPassword()+", "+user.getName()+", "+user.getRole());
-                                             writer.newLine();
-                                             }
-		                                  } finally {
-			                                       if (writer != null) writer.close();
-		                                   }
-
-                                    System.exit(0);
-                                 }else{
-                                    System.out.println("Please try again");
-                                 }
-                              }//end of while loop inside
-
-
-                              
-                           }//end of if 
-                           else{
-                              System.out.println("Please try again");
-                           }
+                                       System.exit(0);
+                                    }else{
+                                       System.out.println("Please try again");
+                                    }
+                                 }//end of while loop inside
+                              }//end of if 
+            
+                          }//end of for
+                          System.out.println("Please try again");
                         }//end of while
                         
                      }else{

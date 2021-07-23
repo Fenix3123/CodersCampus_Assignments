@@ -44,10 +44,12 @@ public class User implements Comparable<User>{
    }
    
    public int compareTo(User that) {
-		if (this.role.compareTo(that.role) == 0) {
-			return this.name.compareTo(that.name); // this will sort names in asc order
+		if (this.role > that.role) {
+	      return 1;
+		} else if (this.role.equals(that.role)) {
+			return this.username.compareTo(that.username);
 		} else {
-			return that.role.compareTo(this.role); // this will sort height in desc order
+			return -1;
 		}
    }
 

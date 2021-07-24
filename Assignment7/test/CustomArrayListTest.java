@@ -18,8 +18,14 @@ class CustomArrayListTest {
 	
 	@Test
 	void returns_false() {
-		CustomList<Integer> myCustomList = new CustomArrayList<>();
-		assertEquals(false, myCustomList.add("dsd"));
+		CustomList<String> myCustomList = new CustomArrayList<>();
+		myCustomList.add("First");
+		myCustomList.add("Third");
+		myCustomList.add(1, "Second");
+		
+	System.out.println(myCustomList.get(2));
+		
+		
 		
 		
 	}

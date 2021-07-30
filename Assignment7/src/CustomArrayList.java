@@ -54,7 +54,6 @@ public class CustomArrayList<T> implements CustomList<T> {
 	@Override
 	public boolean add(int index, T item) throws IndexOutOfBoundsException {
 		items.add(index, item);
-		
 		if(items.get(index) != null) return true;
 		else return false;
 	}

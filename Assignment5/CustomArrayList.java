@@ -16,9 +16,9 @@ public class CustomArrayList<T> implements CustomList<T> {
 		index++;
 		
 		
-		if(items.length == index) {
+		if(items.length == index+1) {
 			Object[] items2 = items;
-			items = new Object[index*2];
+			items = new Object[(index+1)*2];
 			for(int j = 0; j< items2.length; j++) {
 				items[j] = items2[j];
 			}

@@ -4,22 +4,23 @@ import java.util.ArrayList;
 
 public class CustomArrayList<T> implements CustomList<T> {
 	Object[] items = new Object[10];
-	List<Object> items2 = new ArrayList<>();
-	private int i = 0;
+	//List<Object> items2 = new ArrayList<>();
+	private int index = 0;
 	
 	@Override
 	public boolean add(T item) {
 		// TODO Auto-generated method stub
 		
-		items[i] = item;
-		items2.add(item);
-		i++;
+		items[index] = item;
+		//items2.add(item);
+		index++;
 		
 		
-		if(items.length == i) {
-			items = new Object[items.length*2];
-			for(int j = 0; j < items2.size(); j++) {
-				items[j] = items2.get(j);
+		if(items.length == index) {
+			Object[] items2 = items;
+			items = new Object[index*2];
+			for(int j = 0; j< items2.length; j++) {
+				items[j] = items2[j];
 			}
 		}
 		
@@ -28,9 +29,14 @@ public class CustomArrayList<T> implements CustomList<T> {
 
 	@Override
 	public int getSize() {
-		// TODO Auto-generated method stub
-		//items
-		return items.length;
+		int size = 0;
+		
+		for(int i = 0; i < items.length; i++) {
+			if(items[i] != null) {
+				size++;
+			}
+		}
+		return size++;
 	}
 
 	@Override

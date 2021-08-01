@@ -10,19 +10,18 @@ public class CustomArrayList<T> implements CustomList<T> {
 	@Override
 	public boolean add(T item) {
 		// TODO Auto-generated method stub
-		
-		items[index] = item;
-		//items2.add(item);
-		index++;
-		
-		
-		if(items.length == index+1) {
+		if(items.length == index) {
+			System.out.println("growing array "+index);
 			Object[] items2 = items;
-			items = new Object[(index+1)*2];
+			items = new Object[(items.length)*2];
 			for(int j = 0; j< items2.length; j++) {
 				items[j] = items2[j];
 			}
 		}
+		
+		
+		items[index] = item;	
+		index++;
 		
 		return true;
 	}

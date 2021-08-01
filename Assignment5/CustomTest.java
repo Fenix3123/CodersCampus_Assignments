@@ -4,7 +4,7 @@ public class CustomTest {
 		
 		CustomList<String> myCustomList = new CustomArrayList<>();
 		//myCustomList.add("element 1"); // and continue to add another 10, 20 or 40 more elements
-		for(int i = 0; i < 11; i++) {
+		for(int i = 0; i < 23; i++) {
 			myCustomList.add("element "+ i); 
 			
 		}

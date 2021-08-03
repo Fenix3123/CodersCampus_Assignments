@@ -46,7 +46,7 @@ public class User implements Comparable<User>{
    public int compareTo(User that) {
 	
 		if(this.role.equals(that.role)) {
-			return this.username.compareTo(that.username);
+			return this.username.toLowerCase().compareTo(that.username.toLowerCase());
       }else{
          return that.role.compareTo(this.role);
       }

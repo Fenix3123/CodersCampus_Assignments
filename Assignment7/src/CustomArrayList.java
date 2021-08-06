@@ -19,6 +19,8 @@ public class CustomArrayList<T> implements CustomList<T> {
 					index++;
 					return true;
 				}
+			}else if(item == null){
+				return true;
 			}else {
 				if(items.get(index) == item) {
 					index++;
@@ -34,7 +36,7 @@ public class CustomArrayList<T> implements CustomList<T> {
 	public int getSize() {
 		// TODO Auto-generated method stub
 		//items
-		return items.size();
+		return index;
 	}
 
 	@Override

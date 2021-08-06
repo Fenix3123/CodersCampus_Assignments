@@ -11,7 +11,9 @@ class CustomArrayListTest {
 	void add_one_item() {
 		CustomList<String> myCustomList = new CustomArrayList<>();
 		myCustomList.add("First");
-		assertEquals("First", myCustomList.get(0));
+		myCustomList.add("Second");
+		myCustomList.add(null);
+		assertEquals(2, myCustomList.getSize());
 		
 		
 	}

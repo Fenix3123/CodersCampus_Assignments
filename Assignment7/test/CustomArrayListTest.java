@@ -13,23 +13,66 @@ class CustomArrayListTest {
 		myCustomList.add("First");
 		myCustomList.add("Second");
 		myCustomList.add(null);
-		assertEquals(2, myCustomList.getSize());
+		assertEquals(3, myCustomList.getSize());
 		
 		
 	}
 	
 	@Test
-	void returns_false() {
+	void add_works(){
+		CustomList<String> myCustomList = new CustomArrayList<>();
+		myCustomList.add("First");
+		myCustomList.add("Third");
+		
+	
+		
+		assertEquals(2, myCustomList.getSize());
+			
+	}
+	@Test
+	void add_works_with(){
 		CustomList<String> myCustomList = new CustomArrayList<>();
 		myCustomList.add("First");
 		myCustomList.add("Third");
 		myCustomList.add(1, "Second");
+	
 		
-	System.out.println(myCustomList.get(2));
+		assertEquals("Third", myCustomList.get(2));
+			
+	}
+	
+	@Test
+	void add_remove_works(){
+		CustomList<String> myCustomList = new CustomArrayList<>();
+		myCustomList.add("First");
+		myCustomList.add("Third");
+		myCustomList.add(1, "Second");
+		myCustomList.remove(1);
+	
+		
+		assertEquals("Third", myCustomList.get(1));
+			
+	}
+	
+	@Test
+	void add_sizeIncrease_works(){
+		CustomList<Integer> myCustomList = new CustomArrayList<>();
+		myCustomList.add(1);
+		myCustomList.add(2);
+		myCustomList.add(3);
+		myCustomList.add(4);
+		myCustomList.add(5);
+		myCustomList.add(6);
+		myCustomList.add(7);
+		myCustomList.add(8);
+		myCustomList.add(9);
+		myCustomList.add(10);
+		myCustomList.add(12);
+		myCustomList.add(3 ,4);
 		
 		
-		
-		
+		assertEquals(4, myCustomList.get(3));
+			
 	}
 
 }

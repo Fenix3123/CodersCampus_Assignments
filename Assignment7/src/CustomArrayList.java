@@ -4,29 +4,25 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class CustomArrayList<T> implements CustomList<T> {
-	List<T> items = new LinkedList<>();
-	
-	
-	private int index = 0;
+	Object[] items = new Object[10];
+	private int size = 0;
 	
 	@Override
-	public boolean add(T item) {
+	public boolean add(T item){
 		// TODO Auto-generated method stub
 		
-		items.add(item);
-			if(item instanceof String) {
-				if(items.get(index).equals(item)) {
-					index++;
-					return true;
-				}
-			}else if(item == null){
-				return true;
-			}else {
-				if(items.get(index) == item) {
-					index++;
-					return true;
-				}
+		if(items.length == size) {
+			//System.out.println("growing array "+size);
+			Object[] items2 = new Object[(items.length)*2];
+			for(int j = 0; j< items.length; j++) {
+				items2[j] = items[j];
 			}
+			items = items2;
+		}
+		
+		
+		items[size] = item;	
+		size++;
 		
 		return true;
 		
@@ -36,35 +32,50 @@ public class CustomArrayList<T> implements CustomList<T> {
 	public int getSize() {
 		// TODO Auto-generated method stub
 		//items
-		return index;
+		return size;
 	}
 
 	@Override
 	public T get(int index) {
-		// TODO Auto-generated method stub
-		//int arrSize = items.length;
-		//Object smth = null;
-		//for(int i = 0; i < items.length; i++) {
-		//	if(items[index].equals(items[i])) {
-		//		smth = items[index];
-		//	}
-			
-		//}
-		return (T)items.get(index);
+		return (T)items[index];
 	}
 
 	@Override
 	public boolean add(int index, T item) throws IndexOutOfBoundsException {
-		items.add(index, item);
-		if(items.get(index) != null) return true;
-		else return false;
+		System.out.println("Changing item at index "+ index + "to "+ item);
+		//saving the values
+		Object[] items2 = new Object[items.length];
+		for (int i = 0; i < items.length; i++) {     
+            items2[i] = items[i];     
+        }      
+		//adding item to that index
+		items[index] = item;
+		size++;
+		//shuffling	
+		for (int i = index; i < size; i++) {     
+			items[i+1] = items2[i];    
+        }  
+		//items[index+1] = items2[index];
+		
+		
+		return true;
 	}
 
 	@Override
 	public T remove(int index) throws IndexOutOfBoundsException {
 		// TODO Auto-generated method stub
-		T obj = items.get(0);
-		items.remove(index);
+		T obj = (T) items[index];
+		size--;
+		Object[] items2 = new Object[items.length];
+		for (int i = 0; i < items.length; i++) {     
+            items2[i] = items[i];     
+        }      
+		//shuffling
+		for (int i = index; i < size; i++) {     
+			items[i] = items2[i+1];    
+        }  
+		
+		
 		return (T) obj;
 	}
 	

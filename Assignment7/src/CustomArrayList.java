@@ -42,7 +42,7 @@ public class CustomArrayList<T> implements CustomList<T> {
 
 	@Override
 	public boolean add(int index, T item) throws IndexOutOfBoundsException {
-		System.out.println("Changing item at index "+ index + "to "+ item);
+		System.out.println("Changing item at index "+ index + " to "+ item);
 		//saving the values
 		Object[] items2 = new Object[items.length];
 		for (int i = 0; i < items.length; i++) {     

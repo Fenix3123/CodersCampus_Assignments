@@ -74,5 +74,26 @@ class CustomArrayListTest {
 		assertEquals(4, myCustomList.get(3));
 			
 	}
+	
+	@Test
+	void add_with_two_param_Increase_works(){
+		CustomList<Integer> myCustomList = new CustomArrayList<>();
+		myCustomList.add(0, 1);
+		myCustomList.add(1, 2);
+		myCustomList.add(2, 3);
+		myCustomList.add(3, 4);
+		myCustomList.add(4, 5);
+		myCustomList.add(5, 6);
+		myCustomList.add(6, 7);
+		myCustomList.add(7, 8);
+		myCustomList.add(8, 9);
+		myCustomList.add(9, 10);
+		myCustomList.add(10, 12);
+	
+		
+		
+		assertEquals(11, myCustomList.getSize());
+			
+	}
 
 }

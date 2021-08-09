@@ -23,7 +23,7 @@ public class recipeMaker {
 		List<Recipe> recipeList = new ArrayList<>();
 		BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Fenix Xia\\Documents\\GitHub\\CodersCampus_Assignments\\Assignment9\\src\\main\\java\\com\\coderscampus\\Assignment9\\recipes.txt"));
 		in.readLine();
-		Iterable<CSVRecord> records = CSVFormat.DEFAULT.withIgnoreSurroundingSpaces().withHeader("Cooking Minutes", "Dairy Free", "Gluten Free", "Instructions", "Preparation Minutes", "Price Per Serving", "Ready In Minutes", "Servings", "Spoonacular Score", "Title", "Vegan", "Vegetarian").parse(in);
+		Iterable<CSVRecord> records = CSVFormat.DEFAULT.withEscape('\"').withIgnoreSurroundingSpaces().withHeader("Cooking Minutes", "Dairy Free", "Gluten Free", "Instructions", "Preparation Minutes", "Price Per Serving", "Ready In Minutes", "Servings", "Spoonacular Score", "Title", "Vegan", "Vegetarian").parse(in);
 		for (CSVRecord record : records) {
 			Integer cookingMinutes = Integer.parseInt(record.get("Cooking Minutes"));
 			Boolean dairyFree = Boolean.parseBoolean(record.get("Dairy Free"));

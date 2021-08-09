@@ -43,14 +43,26 @@ public class CustomArrayList<T> implements CustomList<T> {
 	@Override
 	public boolean add(int index, T item) throws IndexOutOfBoundsException {
 		System.out.println("Changing item at index "+ index + " to "+ item);
-		//saving the values
+		
+		size++;
+		
+		if(items.length == size) {
+			//System.out.println("growing array "+size);
+			Object[] items2 = new Object[(items.length)*2];
+			for(int j = 0; j< items.length; j++) {
+				items2[j] = items[j];
+			}
+			items = items2;
+		}
+		
+		
+		//
 		Object[] items2 = new Object[items.length];
 		for (int i = 0; i < items.length; i++) {     
             items2[i] = items[i];     
         }      
 		//adding item to that index
 		items[index] = item;
-		size++;
 		//shuffling	
 		for (int i = index; i < size; i++) {     
 			items[i+1] = items2[i];    
@@ -70,6 +82,11 @@ public class CustomArrayList<T> implements CustomList<T> {
 		for (int i = 0; i < items.length; i++) {     
             items2[i] = items[i];     
         }      
+		items = new Object[size];
+		
+		for(int i = 0; i < index; i++) {
+			items[i] = items2[i];
+		}
 		//shuffling
 		for (int i = index; i < size; i++) {     
 			items[i] = items2[i+1];    

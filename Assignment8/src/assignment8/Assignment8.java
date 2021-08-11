@@ -19,10 +19,12 @@ import org.junit.jupiter.api.Test;
 public class Assignment8 implements Callable<List<Integer>>{
 	private List<Integer> numbers = null;
 	private Integer i=0;
+	private Integer num=0;
 	
 	public static void main(String[] args) {
-		Assignment8 assignment8 = new Assignment8();
-		assignment8.getData();
+		Assignment8 assign = new Assignment8();
+		assign.getData();
+		
 	}
 	
 	public Assignment8 () {
@@ -67,7 +69,7 @@ public class Assignment8 implements Callable<List<Integer>>{
 	
 	
 	public void getData () {
-		long zero = 0;
+		//long zero = 0;
 		
         //Assignment8 assignment = new Assignment8();
         List <CompletableFuture<Void>> tasks = new ArrayList<>();
@@ -87,11 +89,11 @@ public class Assignment8 implements Callable<List<Integer>>{
         List <Integer> num13 = new ArrayList<>();
         List <Integer> num14 = new ArrayList<>();
         
-        
+        Assignment8 info = new Assignment8();
         for (int i=0; i<1000; i++) {
-        	CompletableFuture<Void> task = CompletableFuture.supplyAsync(() -> new Assignment8())
+        	CompletableFuture<Void> task = CompletableFuture.supplyAsync(() -> info)
         					 							.thenApply(numbers -> numbers.call())
-        					 							.thenAccept(list -> {	
+        					 							.thenAccept(list -> {
         					 								adding(num0, list, 0);
         					 								adding(num1, list, 1);
         					 								adding(num2, list, 2);
@@ -106,11 +108,8 @@ public class Assignment8 implements Callable<List<Integer>>{
         					 								adding(num11, list, 11);
         					 								adding(num12, list, 12);
         					 								adding(num13, list, 13);
-        					 								adding(num14, list, 14);
-        					 								
-        					 						
-        				
-        					 									});
+        					 								adding(num14, list, 14);	 								
+        					 							});
         	
         	tasks.add(task);
  
@@ -159,18 +158,20 @@ public class Assignment8 implements Callable<List<Integer>>{
     }
 
 	public void adding(List <Integer> namelist, List <Integer> list, int number) {
-		synchronized(namelist) {
-				namelist.add((int) list.stream()
-									   .filter(num -> num == number)
-									   .count());
-			}
+		synchronized (num) {
+			num = (int) list.stream()
+					   		.filter(num -> num == number)
+					   		.count();
+					   
+			namelist.add(num);		
+		}
 	}
 
 	@Override
 	public List<Integer> call(){
+		List<Integer> list = getNumbers();
 		
-		
-		return getNumbers();
+		return list;
 	}
 	
 }

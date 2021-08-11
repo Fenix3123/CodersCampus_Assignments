@@ -10,6 +10,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.Collections;
@@ -19,7 +20,7 @@ import org.junit.jupiter.api.Test;
 public class Assignment8 implements Callable<List<Integer>>{
 	private List<Integer> numbers = null;
 	private Integer i=0;
-	private Integer num=0;
+	private AtomicInteger num = new AtomicInteger(0);
 	
 	public static void main(String[] args) {
 		Assignment8 assign = new Assignment8();
@@ -73,21 +74,21 @@ public class Assignment8 implements Callable<List<Integer>>{
 		
         //Assignment8 assignment = new Assignment8();
         List <CompletableFuture<Void>> tasks = new ArrayList<>();
-        List <Integer> num0 = new ArrayList<>();
-        List <Integer> num1 = new ArrayList<>();
-        List <Integer> num2 = new ArrayList<>();
-        List <Integer> num3 = new ArrayList<>();
-        List <Integer> num4 = new ArrayList<>();
-        List <Integer> num5 = new ArrayList<>();
-        List <Integer> num6 = new ArrayList<>();
-        List <Integer> num7 = new ArrayList<>();
-        List <Integer> num8 = new ArrayList<>();
-        List <Integer> num9 = new ArrayList<>();
-        List <Integer> num10 = new ArrayList<>();
-        List <Integer> num11 = new ArrayList<>();
-        List <Integer> num12 = new ArrayList<>();
-        List <Integer> num13 = new ArrayList<>();
-        List <Integer> num14 = new ArrayList<>();
+        List <AtomicInteger> num0 = new ArrayList<>();
+        List <AtomicInteger> num1 = new ArrayList<>();
+        List <AtomicInteger> num2 = new ArrayList<>();
+        List <AtomicInteger> num3 = new ArrayList<>();
+        List <AtomicInteger> num4 = new ArrayList<>();
+        List <AtomicInteger> num5 = new ArrayList<>();
+        List <AtomicInteger> num6 = new ArrayList<>();
+        List <AtomicInteger> num7 = new ArrayList<>();
+        List <AtomicInteger> num8 = new ArrayList<>();
+        List <AtomicInteger> num9 = new ArrayList<>();
+        List <AtomicInteger> num10 = new ArrayList<>();
+        List <AtomicInteger> num11 = new ArrayList<>();
+        List <AtomicInteger> num12 = new ArrayList<>();
+        List <AtomicInteger> num13 = new ArrayList<>();
+        List <AtomicInteger> num14 = new ArrayList<>();
         
         Assignment8 info = new Assignment8();
         for (int i=0; i<1000; i++) {
@@ -122,46 +123,46 @@ public class Assignment8 implements Callable<List<Integer>>{
         }
         
         //print values
-        int sum0 = num0.stream().mapToInt(Integer::intValue).sum();
+        int sum0 = num0.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("0: "+sum0);
-        int sum1 = num1.stream().mapToInt(Integer::intValue).sum();
+        int sum1 = num1.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("1: "+sum1);
-    	int sum2 = num2.stream().mapToInt(Integer::intValue).sum();
+    	int sum2 = num2.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("2: "+sum2);
-    	int sum3 = num3.stream().mapToInt(Integer::intValue).sum();
+    	int sum3 = num3.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("3: "+sum3);
-    	int sum4 = num3.stream().mapToInt(Integer::intValue).sum();
+    	int sum4 = num3.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("4: "+sum4);
-    	int sum5 = num5.stream().mapToInt(Integer::intValue).sum();
+    	int sum5 = num5.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("5: "+sum5);
-    	int sum6 = num6.stream().mapToInt(Integer::intValue).sum();
+    	int sum6 = num6.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("6: "+sum6);
-    	int sum7 = num7.stream().mapToInt(Integer::intValue).sum();
+    	int sum7 = num7.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("7: "+sum7);
-    	int sum8 = num8.stream().mapToInt(Integer::intValue).sum();
+    	int sum8 = num8.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("8: "+sum8);
-    	int sum9 = num9.stream().mapToInt(Integer::intValue).sum();
+    	int sum9 = num9.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("9: "+sum9);
-    	int sum10 = num10.stream().mapToInt(Integer::intValue).sum();
+    	int sum10 = num10.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("10: "+sum10);
-    	int sum11 = num11.stream().mapToInt(Integer::intValue).sum();
+    	int sum11 = num11.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("11: "+sum11);
-    	int sum12 = num12.stream().mapToInt(Integer::intValue).sum();
+    	int sum12 = num12.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("12: "+sum12);
-    	int sum13 = num13.stream().mapToInt(Integer::intValue).sum();
+    	int sum13 = num13.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("13: "+sum13);
-    	int sum14 = num14.stream().mapToInt(Integer::intValue).sum();
+    	int sum14 = num14.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("14: "+sum14);
 
 
 
     }
 
-	public void adding(List <Integer> namelist, List <Integer> list, int number) {
+	public void adding(List <AtomicInteger> namelist, List <Integer> list, int number) {
 		synchronized (num) {
-			num = (int) list.stream()
-					   		.filter(num -> num == number)
-					   		.count();
+			num.set((int) list.stream()
+					    .filter(num -> num == number)
+					    .count());
 					   
 			namelist.add(num);		
 		}

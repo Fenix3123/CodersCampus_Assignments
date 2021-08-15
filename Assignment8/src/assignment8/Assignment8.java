@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 public class Assignment8 implements Callable<List<Integer>>{
 	private List<Integer> numbers = null;
 	private Integer i=0;
-	private AtomicInteger num = new AtomicInteger(0);
+	//private AtomicInteger num = new AtomicInteger(0);
 	
 	public static void main(String[] args) {
 		Assignment8 assign = new Assignment8();
@@ -74,21 +74,21 @@ public class Assignment8 implements Callable<List<Integer>>{
 		
         //Assignment8 assignment = new Assignment8();
         List <CompletableFuture<Void>> tasks = new ArrayList<>();
-        List <AtomicInteger> num0 = new ArrayList<>();
-        List <AtomicInteger> num1 = new ArrayList<>();
-        List <AtomicInteger> num2 = new ArrayList<>();
-        List <AtomicInteger> num3 = new ArrayList<>();
-        List <AtomicInteger> num4 = new ArrayList<>();
-        List <AtomicInteger> num5 = new ArrayList<>();
-        List <AtomicInteger> num6 = new ArrayList<>();
-        List <AtomicInteger> num7 = new ArrayList<>();
-        List <AtomicInteger> num8 = new ArrayList<>();
-        List <AtomicInteger> num9 = new ArrayList<>();
-        List <AtomicInteger> num10 = new ArrayList<>();
-        List <AtomicInteger> num11 = new ArrayList<>();
-        List <AtomicInteger> num12 = new ArrayList<>();
-        List <AtomicInteger> num13 = new ArrayList<>();
-        List <AtomicInteger> num14 = new ArrayList<>();
+        List <AtomicInteger> num0 = Collections.synchronizedList(new ArrayList<>());
+        List <AtomicInteger> num1 = Collections.synchronizedList(new ArrayList<>());
+        List <AtomicInteger> num2 = Collections.synchronizedList(new ArrayList<>());
+        List <AtomicInteger> num3 = Collections.synchronizedList(new ArrayList<>());
+        List <AtomicInteger> num4 = Collections.synchronizedList(new ArrayList<>());
+        List <AtomicInteger> num5 = Collections.synchronizedList(new ArrayList<>());
+        List <AtomicInteger> num6 = Collections.synchronizedList(new ArrayList<>());
+        List <AtomicInteger> num7 = Collections.synchronizedList(new ArrayList<>());
+        List <AtomicInteger> num8 = Collections.synchronizedList(new ArrayList<>());
+        List <AtomicInteger> num9 = Collections.synchronizedList(new ArrayList<>());
+        List <AtomicInteger> num10 = Collections.synchronizedList(new ArrayList<>());
+        List <AtomicInteger> num11 = Collections.synchronizedList(new ArrayList<>());
+        List <AtomicInteger> num12 = Collections.synchronizedList(new ArrayList<>());
+        List <AtomicInteger> num13 = Collections.synchronizedList(new ArrayList<>());
+        List <AtomicInteger> num14 = Collections.synchronizedList(new ArrayList<>());
         
         Assignment8 info = new Assignment8();
         for (int i=0; i<1000; i++) {
@@ -159,13 +159,14 @@ public class Assignment8 implements Callable<List<Integer>>{
     }
 
 	public void adding(List <AtomicInteger> namelist, List <Integer> list, int number) {
-		synchronized (num) {
-			num.set((int) list.stream()
-					    .filter(num -> num == number)
-					    .count());
+		
+		   AtomicInteger num = new AtomicInteger();
+				   num.set((int) list.stream()
+					    			 .filter(nu -> nu == number)
+					    			 .count());
 					   
 			namelist.add(num);		
-		}
+		
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -14,6 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.Collections;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
@@ -71,8 +73,10 @@ public class Assignment8 implements Callable<List<Integer>>{
 	
 	public void getData () {
 		//long zero = 0;
-		
+		//Map<Integer, List <AtomicInteger>> maper = new HashMap<>();
         //Assignment8 assignment = new Assignment8();
+		ExecutorService runner = Executors.newCachedThreadPool();
+		
         List <CompletableFuture<Void>> tasks = new ArrayList<>();
         List <AtomicInteger> num0 = Collections.synchronizedList(new ArrayList<>());
         List <AtomicInteger> num1 = Collections.synchronizedList(new ArrayList<>());
@@ -92,8 +96,8 @@ public class Assignment8 implements Callable<List<Integer>>{
         
         Assignment8 info = new Assignment8();
         for (int i=0; i<1000; i++) {
-        	CompletableFuture<Void> task = CompletableFuture.supplyAsync(() -> info)
-        					 							.thenApply(numbers -> numbers.call())
+        	CompletableFuture<Void> task = CompletableFuture.supplyAsync(() -> info, runner)
+        					 							.thenApplyAsync(numbers -> numbers.call(), runner)
         					 							.thenAccept(list -> {
         					 								adding(num0, list, 0);
         					 								adding(num1, list, 1);
@@ -131,7 +135,7 @@ public class Assignment8 implements Callable<List<Integer>>{
     	System.out.println("2: "+sum2);
     	int sum3 = num3.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("3: "+sum3);
-    	int sum4 = num3.stream().mapToInt(AtomicInteger::intValue).sum();
+    	int sum4 = num4.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("4: "+sum4);
     	int sum5 = num5.stream().mapToInt(AtomicInteger::intValue).sum();
     	System.out.println("5: "+sum5);
@@ -164,7 +168,7 @@ public class Assignment8 implements Callable<List<Integer>>{
 				   num.set((int) list.stream()
 					    			 .filter(nu -> nu == number)
 					    			 .count());
-					   
+			//maper.put();   
 			namelist.add(num);		
 		
 	}

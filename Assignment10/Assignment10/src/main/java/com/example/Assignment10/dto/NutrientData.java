@@ -1,6 +1,6 @@
 package com.example.Assignment10.dto;
 
-public class nutrientData {
+public class NutrientData {
 	private double calories;
 	private double protein;
 	private double fat;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class DayResponse {
+public class DayData {
 	@JsonProperty("meals")
 	private List<Meals> mealData;
 	private NutrientData nutrients;

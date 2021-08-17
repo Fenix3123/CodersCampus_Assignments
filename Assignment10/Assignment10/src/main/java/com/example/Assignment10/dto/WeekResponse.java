@@ -1,13 +1,13 @@
 package com.example.Assignment10.dto;
 
 public class WeekResponse {
-	private weekData week;
+	private WeekData week;
 
-	public weekData getWeek() {
+	public WeekData getWeek() {
 		return week;
 	}
 
-	public void setWeek(weekData week) {
+	public void setWeek(WeekData week) {
 		this.week = week;
 	}
 }

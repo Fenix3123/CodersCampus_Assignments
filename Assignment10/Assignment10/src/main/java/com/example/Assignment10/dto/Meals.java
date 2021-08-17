@@ -1,6 +1,6 @@
 package com.example.Assignment10.dto;
 
-public class meals {
+public class Meals {
 	private int id;
 	private String imageType;
 	private String title;

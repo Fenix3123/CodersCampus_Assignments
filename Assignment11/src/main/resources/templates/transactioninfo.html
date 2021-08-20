@@ -6,9 +6,12 @@
 	<body>
 		<h1>Transaction ID: [[${transactions.id}]] <span th:if="${transactions.type} == 'C'">(Credit)</span><span th:if="${transactions.type} == 'D'">(Debit)</span></h1>
 		<p>
-		Date: [[${transactions.date}]]
-		Amount: [[${transactions.amount}]]
-		Description: [[${transactions.retailer}]]
+		Date: [[${transactions.date}]] <br>
+		Amount: [[${transactions.amount}]] <br>
+		Description: [[${transactions.description}]] <br>
 		</p>
+		
+		<a href="/transactions">back</a>
+		
 	</body>
 </html>

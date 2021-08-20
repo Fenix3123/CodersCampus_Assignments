@@ -35,13 +35,13 @@ public class TransactionRepository {
 	}
 
 	public Transaction findById(Long id) {
-		
+		Transaction theOne = null;
 		for(Transaction i : findAll()) {
-			if(i.getId() == id) {
-				return i;
+			if(i.getId().equals(id)) {
+				theOne = i;
 			}
 		}
-		return null;
+		return theOne;
 		
 	}
 }

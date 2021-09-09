@@ -1,0 +1,282 @@
+CREATE TABLE `customer_info` (
+  `customer_id` int NOT NULL,
+  `customer_name` varchar(45) DEFAULT NULL,
+  `phone_number` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`customer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `pizza`.`customer_info`
+(`customer_id`,
+`customer_name`,
+`phone_number`)
+VALUES
+(<{customer_id: 1}>,
+<{customer_name: Trevor Page}>,
+<{phone_number: 226-555-4982}>);
+
+INSERT INTO `pizza`.`customer_info`
+(`customer_id`,
+`customer_name`,
+`phone_number`)
+VALUES
+(<{customer_id: 2}>,
+<{customer_name: John Doe}>,
+<{phone_number: 555-555-9498}>);
+
+CREATE TABLE `customer_to_orders` (
+  `customer_id` int NOT NULL,
+  `orderDetail_id` int NOT NULL,
+  KEY `customer_id` (`customer_id`),
+  KEY `orderDetail_id` (`orderDetail_id`),
+  CONSTRAINT `customer_to_orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`),
+  CONSTRAINT `customer_to_orders_ibfk_2` FOREIGN KEY (`orderDetail_id`) REFERENCES `orderdetails` (`orderDetail_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `pizza`.`customer_to_orders`
+(`customer_id`,
+`orderDetail_id`)
+VALUES
+(<{customer_id: 1}>,
+<{orderDetail_id: 1}>);
+
+INSERT INTO `pizza`.`customer_to_orders`
+(`customer_id`,
+`orderDetail_id`)
+VALUES
+(<{customer_id: 1}>,
+<{orderDetail_id: 2}>);
+
+INSERT INTO `pizza`.`customer_to_orders`
+(`customer_id`,
+`orderDetail_id`)
+VALUES
+(<{customer_id: 2}>,
+<{orderDetail_id: 3}>);
+
+INSERT INTO `pizza`.`customer_to_orders`
+(`customer_id`,
+`orderDetail_id`)
+VALUES
+(<{customer_id: 2}>,
+<{orderDetail_id: 4}>);
+
+INSERT INTO `pizza`.`customer_to_orders`
+(`customer_id`,
+`orderDetail_id`)
+VALUES
+(<{customer_id: 1}>,
+<{orderDetail_id: 5}>);
+
+INSERT INTO `pizza`.`customer_to_orders`
+(`customer_id`,
+`orderDetail_id`)
+VALUES
+(<{customer_id: 1}>,
+<{orderDetail_id: 6}>);
+
+CREATE TABLE `orderdetails` (
+  `orderDetail_id` int NOT NULL,
+  `order_name` varchar(45) DEFAULT NULL,
+  `date_time` datetime DEFAULT NULL,
+  `order_id` varchar(45) DEFAULT NULL,
+  `pizza_id` varchar(45) DEFAULT NULL,
+  `quantity` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`orderDetail_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `pizza`.`orderdetails`
+(`orderDetail_id`,
+`order_name`,
+`date_time`,
+`order_id`,
+`pizza_id`,
+`quantity`)
+VALUES
+(<{orderDetail_id:1 }>,
+<{order_name:Trevor Page }>,
+<{date_time: 2014-09-10 09:47:00}>,
+<{order_id: 1}>,
+<{pizza_id: 1}>,
+<{quantity: 1}>);
+
+INSERT INTO `pizza`.`orderdetails`
+(`orderDetail_id`,
+`order_name`,
+`date_time`,
+`order_id`,
+`pizza_id`,
+`quantity`)
+VALUES
+(<{orderDetail_id:2 }>,
+<{order_name:Trevor Page }>,
+<{date_time: 2014-09-10 09:47:00}>,
+<{order_id: 1}>,
+<{pizza_id: 3}>,
+<{quantity: 1}>);
+
+INSERT INTO `pizza`.`orderdetails`
+(`orderDetail_id`,
+`order_name`,
+`date_time`,
+`order_id`,
+`pizza_id`,
+`quantity`)
+VALUES
+(<{orderDetail_id:3 }>,
+<{order_name:John Doe }>,
+<{date_time: 2014-09-10 13:20:00}>,
+<{order_id: 2}>,
+<{pizza_id: 2}>,
+<{quantity: 1}>);
+
+INSERT INTO `pizza`.`orderdetails`
+(`orderDetail_id`,
+`order_name`,
+`date_time`,
+`order_id`,
+`pizza_id`,
+`quantity`)
+VALUES
+(<{orderDetail_id:4 }>,
+<{order_name:John Doe }>,
+<{date_time: 2014-09-10 13:20:00}>,
+<{order_id: 2}>,
+<{pizza_id: 3}>,
+<{quantity: 2}>);
+
+
+INSERT INTO `pizza`.`orderdetails`
+(`orderDetail_id`,
+`order_name`,
+`date_time`,
+`order_id`,
+`pizza_id`,
+`quantity`)
+VALUES
+(<{orderDetail_id:5 }>,
+<{order_name:Trevor Page }>,
+<{date_time: 2014-09-10 09:47:00}>,
+<{order_id: 3}>,
+<{pizza_id: 3}>,
+<{quantity: 1}>);
+
+INSERT INTO `pizza`.`orderdetails`
+(`orderDetail_id`,
+`order_name`,
+`date_time`,
+`order_id`,
+`pizza_id`,
+`quantity`)
+VALUES
+(<{orderDetail_id:6 }>,
+<{order_name:Trevor Page }>,
+<{date_time: 2014-09-10 09:47:00}>,
+<{order_id: 3}>,
+<{pizza_id: 4}>,
+<{quantity: 1}>);
+
+CREATE TABLE `orders_to_pizza` (
+  `orderDetail_id` int NOT NULL,
+  `pizza_id` int NOT NULL,
+  KEY `orderDetail_id` (`orderDetail_id`),
+  KEY `pizza_id` (`pizza_id`),
+  CONSTRAINT `orders_to_pizza_ibfk_1` FOREIGN KEY (`orderDetail_id`) REFERENCES `orderdetails` (`orderDetail_id`),
+  CONSTRAINT `orders_to_pizza_ibfk_2` FOREIGN KEY (`pizza_id`) REFERENCES `pizza_info` (`pizza_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `pizza`.`orders_to_pizza`
+(`orderDetail_id`,
+`pizza_id`)
+VALUES
+(<{orderDetail_id: 1}>,
+<{pizza_id:1 }>);
+
+INSERT INTO `pizza`.`orders_to_pizza`
+(`orderDetail_id`,
+`pizza_id`)
+VALUES
+(<{orderDetail_id: 2}>,
+<{pizza_id:3 }>);
+
+INSERT INTO `pizza`.`orders_to_pizza`
+(`orderDetail_id`,
+`pizza_id`)
+VALUES
+(<{orderDetail_id: 3}>,
+<{pizza_id:2 }>);
+
+INSERT INTO `pizza`.`orders_to_pizza`
+(`orderDetail_id`,
+`pizza_id`)
+VALUES
+(<{orderDetail_id: 4}>,
+<{pizza_id:3 }>);
+
+INSERT INTO `pizza`.`orders_to_pizza`
+(`orderDetail_id`,
+`pizza_id`)
+VALUES
+(<{orderDetail_id: 5}>,
+<{pizza_id:3 }>);
+
+INSERT INTO `pizza`.`orders_to_pizza`
+(`orderDetail_id`,
+`pizza_id`)
+VALUES
+(<{orderDetail_id: 6}>,
+<{pizza_id:4 }>);
+
+CREATE TABLE `pizza_info` (
+  `pizza_id` int NOT NULL,
+  `pizza_name` varchar(45) DEFAULT NULL,
+  `pizza_price` decimal(4,2) DEFAULT NULL,
+  PRIMARY KEY (`pizza_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `pizza`.`pizza_info`
+(`pizza_id`,
+`pizza_name`,
+`pizza_price`)
+VALUES
+(<{pizza_id: 1}>,
+<{pizza_name: pepperoni and cheese}>,
+<{pizza_price: 7.99}>);
+
+
+INSERT INTO `pizza`.`pizza_info`
+(`pizza_id`,
+`pizza_name`,
+`pizza_price`)
+VALUES
+(<{pizza_id: 2}>,
+<{pizza_name: vegetarian}>,
+<{pizza_price: 9.99}>);
+
+
+INSERT INTO `pizza`.`pizza_info`
+(`pizza_id`,
+`pizza_name`,
+`pizza_price`)
+VALUES
+(<{pizza_id: 3}>,
+<{pizza_name: Meat lovers}>,
+<{pizza_price: 14.99}>);
+
+
+INSERT INTO `pizza`.`pizza_info`
+(`pizza_id`,
+`pizza_name`,
+`pizza_price`)
+VALUES
+(<{pizza_id: 4}>,
+<{pizza_name: hawaiian}>,
+<{pizza_price: 12.99}>);
+
+
+
+
+
+
+
+
+

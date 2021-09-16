@@ -1,3 +1,5 @@
+CREATE DATABASE pizza;
+
 CREATE TABLE `customer_info` (
   `customer_id` int NOT NULL,
   `customer_name` varchar(45) DEFAULT NULL,
@@ -10,18 +12,18 @@ INSERT INTO `pizza`.`customer_info`
 `customer_name`,
 `phone_number`)
 VALUES
-(<{customer_id: 1}>,
-<{customer_name: Trevor Page}>,
-<{phone_number: 226-555-4982}>);
+(1,
+'Trevor Page',
+'226-555-4982');
 
 INSERT INTO `pizza`.`customer_info`
 (`customer_id`,
 `customer_name`,
 `phone_number`)
 VALUES
-(<{customer_id: 2}>,
-<{customer_name: John Doe}>,
-<{phone_number: 555-555-9498}>);
+(2,
+'John Doe',
+'555-555-9498');
 
 CREATE TABLE `customer_to_orders` (
   `customer_id` int NOT NULL,
@@ -36,43 +38,42 @@ INSERT INTO `pizza`.`customer_to_orders`
 (`customer_id`,
 `orderDetail_id`)
 VALUES
-(<{customer_id: 1}>,
-<{orderDetail_id: 1}>);
+(1, 1);
 
 INSERT INTO `pizza`.`customer_to_orders`
 (`customer_id`,
 `orderDetail_id`)
 VALUES
-(<{customer_id: 1}>,
-<{orderDetail_id: 2}>);
+(1,
+2);
 
 INSERT INTO `pizza`.`customer_to_orders`
 (`customer_id`,
 `orderDetail_id`)
 VALUES
-(<{customer_id: 2}>,
-<{orderDetail_id: 3}>);
+(2,
+3);
 
 INSERT INTO `pizza`.`customer_to_orders`
 (`customer_id`,
 `orderDetail_id`)
 VALUES
-(<{customer_id: 2}>,
-<{orderDetail_id: 4}>);
+(2,
+4);
 
 INSERT INTO `pizza`.`customer_to_orders`
 (`customer_id`,
 `orderDetail_id`)
 VALUES
-(<{customer_id: 1}>,
-<{orderDetail_id: 5}>);
+(1,
+5);
 
 INSERT INTO `pizza`.`customer_to_orders`
 (`customer_id`,
 `orderDetail_id`)
 VALUES
-(<{customer_id: 1}>,
-<{orderDetail_id: 6}>);
+(1,
+6);
 
 CREATE TABLE `orderdetails` (
   `orderDetail_id` int NOT NULL,
@@ -92,12 +93,12 @@ INSERT INTO `pizza`.`orderdetails`
 `pizza_id`,
 `quantity`)
 VALUES
-(<{orderDetail_id:1 }>,
-<{order_name:Trevor Page }>,
-<{date_time: 2014-09-10 09:47:00}>,
-<{order_id: 1}>,
-<{pizza_id: 1}>,
-<{quantity: 1}>);
+(1,
+'Trevor Page',
+'2014-09-10 09:47:00',
+1,
+1,
+1);
 
 INSERT INTO `pizza`.`orderdetails`
 (`orderDetail_id`,
@@ -107,12 +108,12 @@ INSERT INTO `pizza`.`orderdetails`
 `pizza_id`,
 `quantity`)
 VALUES
-(<{orderDetail_id:2 }>,
-<{order_name:Trevor Page }>,
-<{date_time: 2014-09-10 09:47:00}>,
-<{order_id: 1}>,
-<{pizza_id: 3}>,
-<{quantity: 1}>);
+(2,
+'Trevor Page',
+'2014-09-10 09:47:00',
+1,
+3,
+1);
 
 INSERT INTO `pizza`.`orderdetails`
 (`orderDetail_id`,
@@ -122,12 +123,12 @@ INSERT INTO `pizza`.`orderdetails`
 `pizza_id`,
 `quantity`)
 VALUES
-(<{orderDetail_id:3 }>,
-<{order_name:John Doe }>,
-<{date_time: 2014-09-10 13:20:00}>,
-<{order_id: 2}>,
-<{pizza_id: 2}>,
-<{quantity: 1}>);
+(3,
+'John Doe',
+'2014-09-10 13:20:00',
+2,
+2,
+1);
 
 INSERT INTO `pizza`.`orderdetails`
 (`orderDetail_id`,
@@ -137,12 +138,12 @@ INSERT INTO `pizza`.`orderdetails`
 `pizza_id`,
 `quantity`)
 VALUES
-(<{orderDetail_id:4 }>,
-<{order_name:John Doe }>,
-<{date_time: 2014-09-10 13:20:00}>,
-<{order_id: 2}>,
-<{pizza_id: 3}>,
-<{quantity: 2}>);
+(4,
+'John Doe',
+'2014-09-10 13:20:00',
+2,
+3,
+2);
 
 
 INSERT INTO `pizza`.`orderdetails`
@@ -153,12 +154,12 @@ INSERT INTO `pizza`.`orderdetails`
 `pizza_id`,
 `quantity`)
 VALUES
-(<{orderDetail_id:5 }>,
-<{order_name:Trevor Page }>,
-<{date_time: 2014-09-10 09:47:00}>,
-<{order_id: 3}>,
-<{pizza_id: 3}>,
-<{quantity: 1}>);
+(5,
+'Trevor Page',
+'2014-09-10 09:47:00',
+3,
+3,
+1);
 
 INSERT INTO `pizza`.`orderdetails`
 (`orderDetail_id`,
@@ -168,12 +169,12 @@ INSERT INTO `pizza`.`orderdetails`
 `pizza_id`,
 `quantity`)
 VALUES
-(<{orderDetail_id:6 }>,
-<{order_name:Trevor Page }>,
-<{date_time: 2014-09-10 09:47:00}>,
-<{order_id: 3}>,
-<{pizza_id: 4}>,
-<{quantity: 1}>);
+(6,
+'Trevor Page',
+'2014-09-10 09:47:00',
+3,
+4,
+1);
 
 CREATE TABLE `orders_to_pizza` (
   `orderDetail_id` int NOT NULL,
@@ -188,43 +189,43 @@ INSERT INTO `pizza`.`orders_to_pizza`
 (`orderDetail_id`,
 `pizza_id`)
 VALUES
-(<{orderDetail_id: 1}>,
-<{pizza_id:1 }>);
+(1,
+1);
 
 INSERT INTO `pizza`.`orders_to_pizza`
 (`orderDetail_id`,
 `pizza_id`)
 VALUES
-(<{orderDetail_id: 2}>,
-<{pizza_id:3 }>);
+(2,
+3);
 
 INSERT INTO `pizza`.`orders_to_pizza`
 (`orderDetail_id`,
 `pizza_id`)
 VALUES
-(<{orderDetail_id: 3}>,
-<{pizza_id:2 }>);
+(3,
+2);
 
 INSERT INTO `pizza`.`orders_to_pizza`
 (`orderDetail_id`,
 `pizza_id`)
 VALUES
-(<{orderDetail_id: 4}>,
-<{pizza_id:3 }>);
+(4,
+3);
 
 INSERT INTO `pizza`.`orders_to_pizza`
 (`orderDetail_id`,
 `pizza_id`)
 VALUES
-(<{orderDetail_id: 5}>,
-<{pizza_id:3 }>);
+(5,
+3);
 
 INSERT INTO `pizza`.`orders_to_pizza`
 (`orderDetail_id`,
 `pizza_id`)
 VALUES
-(<{orderDetail_id: 6}>,
-<{pizza_id:4 }>);
+(6,
+4);
 
 CREATE TABLE `pizza_info` (
   `pizza_id` int NOT NULL,
@@ -238,9 +239,9 @@ INSERT INTO `pizza`.`pizza_info`
 `pizza_name`,
 `pizza_price`)
 VALUES
-(<{pizza_id: 1}>,
-<{pizza_name: pepperoni and cheese}>,
-<{pizza_price: 7.99}>);
+(1,
+'pepperoni and cheese',
+7.99);
 
 
 INSERT INTO `pizza`.`pizza_info`
@@ -248,9 +249,9 @@ INSERT INTO `pizza`.`pizza_info`
 `pizza_name`,
 `pizza_price`)
 VALUES
-(<{pizza_id: 2}>,
-<{pizza_name: vegetarian}>,
-<{pizza_price: 9.99}>);
+(2,
+'vegetarian',
+9.99);
 
 
 INSERT INTO `pizza`.`pizza_info`
@@ -258,9 +259,9 @@ INSERT INTO `pizza`.`pizza_info`
 `pizza_name`,
 `pizza_price`)
 VALUES
-(<{pizza_id: 3}>,
-<{pizza_name: Meat lovers}>,
-<{pizza_price: 14.99}>);
+(3,
+'Meat lovers',
+14.99);
 
 
 INSERT INTO `pizza`.`pizza_info`
@@ -268,10 +269,16 @@ INSERT INTO `pizza`.`pizza_info`
 `pizza_name`,
 `pizza_price`)
 VALUES
-(<{pizza_id: 4}>,
-<{pizza_name: hawaiian}>,
-<{pizza_price: 12.99}>);
+(4,
+'hawaiian',
+12.99);
 
+--the query to run
+
+select order_name, date_time , sum(quantity * (Select pizza_price from pizza_info where orderdetails.pizza_id = pizza_info.pizza_id)) as total 
+from orderdetails
+left join pizza_info on orderdetails.orderDetail_id = pizza_info.pizza_id
+group by order_name;
 
 
 

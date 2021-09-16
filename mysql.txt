@@ -25,56 +25,6 @@ VALUES
 'John Doe',
 '555-555-9498');
 
-CREATE TABLE `customer_to_orders` (
-  `customer_id` int NOT NULL,
-  `orderDetail_id` int NOT NULL,
-  KEY `customer_id` (`customer_id`),
-  KEY `orderDetail_id` (`orderDetail_id`),
-  CONSTRAINT `customer_to_orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`),
-  CONSTRAINT `customer_to_orders_ibfk_2` FOREIGN KEY (`orderDetail_id`) REFERENCES `orderdetails` (`orderDetail_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-INSERT INTO `pizza`.`customer_to_orders`
-(`customer_id`,
-`orderDetail_id`)
-VALUES
-(1, 1);
-
-INSERT INTO `pizza`.`customer_to_orders`
-(`customer_id`,
-`orderDetail_id`)
-VALUES
-(1,
-2);
-
-INSERT INTO `pizza`.`customer_to_orders`
-(`customer_id`,
-`orderDetail_id`)
-VALUES
-(2,
-3);
-
-INSERT INTO `pizza`.`customer_to_orders`
-(`customer_id`,
-`orderDetail_id`)
-VALUES
-(2,
-4);
-
-INSERT INTO `pizza`.`customer_to_orders`
-(`customer_id`,
-`orderDetail_id`)
-VALUES
-(1,
-5);
-
-INSERT INTO `pizza`.`customer_to_orders`
-(`customer_id`,
-`orderDetail_id`)
-VALUES
-(1,
-6);
-
 CREATE TABLE `orderdetails` (
   `orderDetail_id` int NOT NULL,
   `order_name` varchar(45) DEFAULT NULL,
@@ -176,6 +126,104 @@ VALUES
 4,
 1);
 
+CREATE TABLE `pizza_info` (
+  `pizza_id` int NOT NULL,
+  `pizza_name` varchar(45) DEFAULT NULL,
+  `pizza_price` decimal(4,2) DEFAULT NULL,
+  PRIMARY KEY (`pizza_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `pizza`.`pizza_info`
+(`pizza_id`,
+`pizza_name`,
+`pizza_price`)
+VALUES
+(1,
+'pepperoni and cheese',
+7.99);
+
+
+INSERT INTO `pizza`.`pizza_info`
+(`pizza_id`,
+`pizza_name`,
+`pizza_price`)
+VALUES
+(2,
+'vegetarian',
+9.99);
+
+
+INSERT INTO `pizza`.`pizza_info`
+(`pizza_id`,
+`pizza_name`,
+`pizza_price`)
+VALUES
+(3,
+'Meat lovers',
+14.99);
+
+
+INSERT INTO `pizza`.`pizza_info`
+(`pizza_id`,
+`pizza_name`,
+`pizza_price`)
+VALUES
+(4,
+'hawaiian',
+12.99);
+
+CREATE TABLE `customer_to_orders` (
+  `customer_id` int NOT NULL,
+  `orderDetail_id` int NOT NULL,
+  KEY `customer_id` (`customer_id`),
+  KEY `orderDetail_id` (`orderDetail_id`),
+  CONSTRAINT `customer_to_orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer_info` (`customer_id`),
+  CONSTRAINT `customer_to_orders_ibfk_2` FOREIGN KEY (`orderDetail_id`) REFERENCES `orderdetails` (`orderDetail_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `pizza`.`customer_to_orders`
+(`customer_id`,
+`orderDetail_id`)
+VALUES
+(1, 1);
+
+INSERT INTO `pizza`.`customer_to_orders`
+(`customer_id`,
+`orderDetail_id`)
+VALUES
+(1,
+2);
+
+INSERT INTO `pizza`.`customer_to_orders`
+(`customer_id`,
+`orderDetail_id`)
+VALUES
+(2,
+3);
+
+INSERT INTO `pizza`.`customer_to_orders`
+(`customer_id`,
+`orderDetail_id`)
+VALUES
+(2,
+4);
+
+INSERT INTO `pizza`.`customer_to_orders`
+(`customer_id`,
+`orderDetail_id`)
+VALUES
+(1,
+5);
+
+INSERT INTO `pizza`.`customer_to_orders`
+(`customer_id`,
+`orderDetail_id`)
+VALUES
+(1,
+6);
+
+
+
 CREATE TABLE `orders_to_pizza` (
   `orderDetail_id` int NOT NULL,
   `pizza_id` int NOT NULL,
@@ -227,51 +275,7 @@ VALUES
 (6,
 4);
 
-CREATE TABLE `pizza_info` (
-  `pizza_id` int NOT NULL,
-  `pizza_name` varchar(45) DEFAULT NULL,
-  `pizza_price` decimal(4,2) DEFAULT NULL,
-  PRIMARY KEY (`pizza_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `pizza`.`pizza_info`
-(`pizza_id`,
-`pizza_name`,
-`pizza_price`)
-VALUES
-(1,
-'pepperoni and cheese',
-7.99);
-
-
-INSERT INTO `pizza`.`pizza_info`
-(`pizza_id`,
-`pizza_name`,
-`pizza_price`)
-VALUES
-(2,
-'vegetarian',
-9.99);
-
-
-INSERT INTO `pizza`.`pizza_info`
-(`pizza_id`,
-`pizza_name`,
-`pizza_price`)
-VALUES
-(3,
-'Meat lovers',
-14.99);
-
-
-INSERT INTO `pizza`.`pizza_info`
-(`pizza_id`,
-`pizza_name`,
-`pizza_price`)
-VALUES
-(4,
-'hawaiian',
-12.99);
 
 --the query to run
 

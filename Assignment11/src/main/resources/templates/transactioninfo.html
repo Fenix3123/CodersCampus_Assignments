@@ -7,7 +7,7 @@
 		<h1>Transaction ID: [[${transactions.id}]] <span th:if="${transactions.type} == 'C'">(Credit)</span><span th:if="${transactions.type} == 'D'">(Debit)</span></h1>
 		<p>
 		Date: [[${transactions.date}]] <br>
-		Amount: [[${transactions.amount}]] <br>
+		Amount: <span th:if="${transactions.type} == 'C'">-</span>[[${transactions.amount}]] <br>
 		Description: [[${transactions.description}]] <br>
 		</p>
 		

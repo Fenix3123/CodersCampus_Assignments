@@ -277,7 +277,7 @@ VALUES
 
 
 
---the query to run
+-- the query to run
 
 select order_name, sum(quantity * (Select pizza_price from pizza_info where orderdetails.pizza_id = pizza_info.pizza_id)) as total 
 from orderdetails
@@ -287,7 +287,11 @@ group by order_name;
 select order_name, date_time , sum(quantity * (Select pizza_price from pizza_info where orderdetails.pizza_id = pizza_info.pizza_id)) as total 
 from orderdetails
 left join pizza_info on orderdetails.orderDetail_id = pizza_info.pizza_id
-group by date_time;
+group by order_name;
+
+select * from orderdetails;
+
+SELECT CURRENT_USER();
 
 
 
@@ -296,3 +300,9 @@ group by date_time;
 
 
 
+
+
+select order_name, date_time , sum(quantity * (Select pizza_price from pizza_info where orderdetails.pizza_id = pizza_info.pizza_id)) as total 
+from orderdetails
+left join pizza_info on orderdetails.orderDetail_id = pizza_info.pizza_id
+group by order_name;

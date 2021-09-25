@@ -7,6 +7,7 @@
 				<h2 th:text="${account.accountName}"></h2>
 				
 				 <form th:action="@{/users/{userId}/accounts/{accountsId}(userId=${user.userId}, accountsId=${account.accountId})}" method="post">
+				 	<input type="hidden" th:field="${account.accountId}" />
 					<div>
 						Account Name: <input type="text" th:field="${account.accountName}" />
 					</div>

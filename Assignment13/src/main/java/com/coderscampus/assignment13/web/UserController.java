@@ -73,8 +73,8 @@ public class UserController {
 	@GetMapping("/users/{userId}/accounts")
 	public String getCreateAccounts (ModelMap model, @PathVariable Long userId) {
 		User user = userService.findById(userId);
-		int num = user.getUserId().intValue();
-		Account acc = user.getAccounts().get(num);
+		int num = user.getAccounts().size();
+		Account acc = user.getAccounts().get(num-1);
 		model.put("account", acc);
 		model.put("user", user);
 		
@@ -103,8 +103,8 @@ public class UserController {
 	@GetMapping("/users/{userId}/accounts/{accountsId}")
 	public String updateAccounts (ModelMap model, @PathVariable Long userId, @PathVariable Long accountsId) {
 		User user = userService.findById(userId);
-		int num = user.getUserId().intValue();
-		Account acc = user.getAccounts().get(num);
+		//int num = user.getUserId().intValue();
+		Account acc = userService.findByAccountId(accountsId);
 		model.put("account", acc);
 		model.put("user", user);
 				
@@ -118,6 +118,6 @@ public class UserController {
 		acc.setAccountName(accountWithName.getAccountName());
 		userService.saveAccount(acc);
 		userService.saveUser(user);
-		return "redirect:/users/"+user.getUserId()+"/accounts"+acc.getAccountId();
+		return "redirect:/users/"+user.getUserId()+"/accounts/"+acc.getAccountId();
 	}
 }

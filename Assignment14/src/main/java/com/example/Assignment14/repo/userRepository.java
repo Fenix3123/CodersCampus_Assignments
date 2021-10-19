@@ -17,4 +17,8 @@ public class userRepository {
 	public User findById (Long userId) {
 		return users.get(userId);
 	}
+	
+	public int size () {
+		return users.size();
+	}
 }

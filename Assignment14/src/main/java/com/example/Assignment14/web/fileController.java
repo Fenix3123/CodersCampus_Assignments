@@ -31,37 +31,36 @@ public class fileController {
 		return "channel";
 	}
 	
-	@GetMapping("/channels")
-	public String getChatChannel(ModelMap model, Message msg) {
-		//User user = new User();
-		//model.put("user", user);
-		model.put("msg", msg);
-		return "chat";
-	}
-	
 	@PostMapping("/welcome")
 	public String sendName(User user) {
 		user.setId(i);
 		userServ.save(user);
-		return "redirect:/channels";
+		i++;
+		return "redirect:/channels/1/"+j;
 	}
 	
-	@PostMapping("/channels")
-	public String sendMsg(Message msg) {
-		User user = userServ.findById(i);
-		i++;
+	@GetMapping("/channels/1/{userid}")
+	public String getChatChannel(ModelMap model, Message msg, @PathVariable Long userid) {
+		if(j < userServ.size()) {
+			j++;
+		}
+		List<Message> L_msg = msgServ.list();
+		model.put("msg", msg);
+		model.put("L_msg", L_msg);
+		return "chat";
+	}
+	
+	@PostMapping("/channels/1/{userid}")
+	public String sendMsg(Message msg, @PathVariable Long userid) {
+		//figure out how to assign the user to the message
+		User user = userServ.findById(userid);
+		
 		msg.setUser(user);
 		msgServ.save(msg);
 		
-		return "redirect:/channels/1";
+		return "redirect:/channels/1/"+userid;
 	}
 	
-	@GetMapping("/channels/1")
-	public String getChatChannel(ModelMap model) {
-		List<Message> ListMessage = msgServ.list();
-		//model.put("user", user);
-		model.put("msg_l", ListMessage);
-		return "chat";
-	}
+	
 }
 

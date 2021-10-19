@@ -8,6 +8,10 @@
 	<body>
 		<h2>General Chat</h2>
 		
+		<div th:each="messages : ${L_msg}">
+				[[${messages.user.name}]]: [[${messages.message}]]
+		</div>
+		
 		<form action="" method="post">
 			<div>
 				 <!-- <input type="hidden" th:field="${user}" />-->

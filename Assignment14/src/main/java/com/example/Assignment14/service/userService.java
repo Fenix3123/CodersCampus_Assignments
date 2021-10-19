@@ -17,5 +17,8 @@ public class userService {
 	public User findById (Long userId) {
 		return userRepo.findById(userId);
 	}
+	public int size () {
+		return userRepo.size();
+	}
 	
 }

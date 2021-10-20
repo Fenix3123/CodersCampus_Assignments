@@ -8,7 +8,7 @@
 	<body>
 		<h2>General Chat</h2>
 		
-		<div th:each="messages : ${L_msg}">
+		<div th:unless="${#lists.size(L_msg) >= 1}" th:each="messages : ${L_msg}">
 				[[${messages.user.name}]]: [[${messages.message}]]
 		</div>
 		

@@ -1,6 +1,7 @@
 package com.example.Assignment14.web;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +42,18 @@ public class fileController {
 	
 	@GetMapping("/channels/1/{userid}")
 	public String getChatChannel(ModelMap model, Message msg, @PathVariable Long userid) {
+		List<Message> L_msg = new ArrayList();
 		if(j < userServ.size()) {
 			j++;
 		}
-		List<Message> L_msg = msgServ.list();
+		if(msgServ.list() == null) {
+			//List<Message> L_msg = new ArrayList();
+		}else {
+			L_msg = msgServ.list();
+			model.put("L_msg", L_msg);
+		}
+		//List<Message> L_msg = msgServ.list();
 		model.put("msg", msg);
-		model.put("L_msg", L_msg);
 		return "chat";
 	}
 	

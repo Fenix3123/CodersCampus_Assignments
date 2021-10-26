@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.Assignment14.domain.Message;
 import com.example.Assignment14.domain.User;
@@ -19,8 +20,9 @@ import com.example.Assignment14.service.userService;
 
 @Controller
 public class fileController {
-	@Autowired
+	@Autowired 
 	private userService userServ;
+	@Autowired 
 	private MessageService msgServ;
 	Long i = (long) 1;
 	Long j = (long) 1;
@@ -37,19 +39,18 @@ public class fileController {
 		user.setId(i);
 		userServ.save(user);
 		i++;
+		if(j < userServ.size()) {
+			j++;
+		}
 		return "redirect:/channels/1/"+j;
 	}
 	
 	@GetMapping("/channels/1/{userid}")
 	public String getChatChannel(ModelMap model, Message msg, @PathVariable Long userid) {
-		List<Message> L_msg = new ArrayList();
-		if(j < userServ.size()) {
-			j++;
-		}
-		if(msgServ.list() == null) {
+		List<Message> L_msg = msgServ.list();
+		if(L_msg.size() == 0){
 			//List<Message> L_msg = new ArrayList();
 		}else {
-			L_msg = msgServ.list();
 			model.put("L_msg", L_msg);
 		}
 		//List<Message> L_msg = msgServ.list();
@@ -58,14 +59,19 @@ public class fileController {
 	}
 	
 	@PostMapping("/channels/1/{userid}")
-	public String sendMsg(Message msg, @PathVariable Long userid) {
+	public String sendMsg(@RequestBody Message msg, @PathVariable Long userid) {
 		//figure out how to assign the user to the message
 		User user = userServ.findById(userid);
-		
 		msg.setUser(user);
 		msgServ.save(msg);
-		
+		//List<Message> L_msg = msgServ.list();
 		return "redirect:/channels/1/"+userid;
+	}
+	
+	@GetMapping("/getUserId")
+	@ResponseBody
+	public long getUserId() {
+		return userServ.size();
 	}
 	
 	

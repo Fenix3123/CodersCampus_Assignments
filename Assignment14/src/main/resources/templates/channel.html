@@ -1,37 +1,42 @@
 <html xmlns:th="http://thymeleaf.org">
 	<head>
 		<title>Join Channel</title>
-		<!--  
+		 
 		<script type="text/javascript">
 		 let person = prompt("Please enter your name: ");
 		 
 		</script>
-		 -->
+		 
 	</head>
 	
 	<body>
 		<h2>Join a Channel</h2>
 		
-		<!--  
-		<a th:href="@{/channels/{id}(id=${1})}" id="button">General</a>
+		
+		<div id="general" style="color:blue;text-decoration: underline;">General</div>
 		
 		<script type="text/javascript">
 		
-		let name = document.getElementById("button");
-		let username = {
-			"name": person
+		let genChat = document.getElementById("general");
+		let obj = {
+			"user": {"id" : 0, "name" : person},
+			"channelId": "1"
 		}
-		name.addEventListener('Click', () =>{
-			fetch(`http://localhost:8080/channel/1`, {
+		genChat.addEventListener('click', () =>{
+			fetch('http://localhost:8080/welcome', {
 				method: "POST",
+				redirect: "follow",
 				headers: {
 					"Content-type": "application/json"
 				},
-				body: JSON.stringify(username)
-			})
+				body: JSON.stringify(obj)
+				
+			}).then(response =>{
+				return response.text()
+			}).then(data => {console.log(data)})
 		})
 		</script>
-		-->
+		
 		<form action="" method="post">
 			<div>
 				Username: <input type="text" th:field="${user.name}" />

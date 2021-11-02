@@ -1,6 +1,7 @@
 package com.example.Assignment14.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,11 @@ public class MessageService {
 	@Autowired
 	private MessageRepo msgRepo;
 	
-	public void save (Message str) {
-		msgRepo.save(str);
+	public void save (Integer i, Message str) {
+		msgRepo.save(i, str);
 	}
 	
-	public List list() {
+	public Map list() {
 		return msgRepo.msg;
 	}
 }

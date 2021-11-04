@@ -4,7 +4,7 @@
 	</head>
 	
 	<body>
-		<h2>General Chat</h2>
+		<h2>You can Talk here!</h2>
 		<!--/*  
 		<div th:if="${#lists.size(L_msg) >= 1}" th:each="messages : ${L_msg}">
 				[[${messages.user.name}]]: [[${messages.message}]]
@@ -20,7 +20,11 @@
 			
 		
 		
-	<script type="text/javascript">		
+	<script type="text/javascript">
+		let text = window.location.href;
+		const myArray = text.split("/");
+		var channelId = myArray[4];
+		
 		function myFunction() {
 			var msg = document.getElementById('message').value
 			
@@ -47,8 +51,14 @@
 		 		return response.json()
 		 	})
 		 	.then((data)=>{	
-		 		document.getElementById('message_board').innerHTML = ""
-		 		console.log(data)
+		 		document.getElementById('message_board').innerHTML = "";
+		 		data.forEach(function(value, key){
+		 			if(key === channelId){
+		 				key.forEach(element =>{
+		 					document.getElementById('message_board').innerHTML += "<p>"+ element.user.name+" : "+element.message+"</p>";
+		 				})
+		 			}
+		 		})
 		 	})
 		}
 		

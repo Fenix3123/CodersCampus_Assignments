@@ -37,6 +37,7 @@ public class fileController {
 	}
 	
 	@PostMapping("/welcome")
+	@ResponseBody
 	public String sendName(@RequestBody PostObj postobj) {
 		postobj.getUser().setId(i);
 		userServ.save(postobj.getUser());
@@ -44,7 +45,7 @@ public class fileController {
 		if(j < userServ.size()) {
 			j++;
 		}
-		return "redirect:/channels/"+postobj.getChannelId()+"/"+j;
+		return "/channels/"+postobj.getChannelId()+"/"+j;
 	}
 	
 	@GetMapping("/channels/{channelId}/{userid}")
@@ -67,7 +68,7 @@ public class fileController {
 		msg.setUser(user);
 		msgServ.save(channelId, msg);
 		//List<Message> L_msg = msgServ.list();
-		return "redirect:/channels/1/"+userid;
+		return "redirect:/channels/"+ channelId+"/"+userid;
 	}
 	
 	@GetMapping("/getList")

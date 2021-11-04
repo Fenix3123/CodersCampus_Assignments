@@ -14,26 +14,49 @@
 		
 		
 		<div id="general" style="color:blue;text-decoration: underline;">General</div>
+		<div id="general2" style="color:blue;text-decoration: underline;">General2</div>
 		
 		<script type="text/javascript">
 		
 		let genChat = document.getElementById("general");
-		let obj = {
+		let genChat2 = document.getElementById("general2");
+		
+		let obj1 = {
 			"user": {"id" : 0, "name" : person},
 			"channelId": "1"
+		}
+		let obj2 = {
+			"user": {"id" : 0, "name" : person},
+			"channelId": "2"
 		}
 		genChat.addEventListener('click', () =>{
 			fetch('http://localhost:8080/welcome', {
 				method: "POST",
-				redirect: "follow",
 				headers: {
 					"Content-type": "application/json"
 				},
-				body: JSON.stringify(obj)
+				body: JSON.stringify(obj1)
 				
 			}).then(response =>{
 				return response.text()
-			}).then(data => {console.log(data)})
+			}).then(data => {
+				window.location.href = 'http://localhost:8080' + data
+			})
+		})
+		
+		genChat2.addEventListener('click', () =>{
+			fetch('http://localhost:8080/welcome', {
+				method: "POST",
+				headers: {
+					"Content-type": "application/json"
+				},
+				body: JSON.stringify(obj2)
+				
+			}).then(response =>{
+				return response.text()
+			}).then(data => {
+				window.location.href = 'http://localhost:8080' + data
+			})
 		})
 		</script>
 		

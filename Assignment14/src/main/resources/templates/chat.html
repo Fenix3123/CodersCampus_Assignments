@@ -52,13 +52,17 @@
 		 	})
 		 	.then((data)=>{	
 		 		document.getElementById('message_board').innerHTML = "";
-		 		data.forEach(function(value, key){
+		 		console.log(JSON.stringify(data));
+		 		
+		 		data.map(function(value, key){
 		 			if(key === channelId){
 		 				key.forEach(element =>{
 		 					document.getElementById('message_board').innerHTML += "<p>"+ element.user.name+" : "+element.message+"</p>";
 		 				})
 		 			}
+		 		
 		 		})
+		
 		 	})
 		}
 		

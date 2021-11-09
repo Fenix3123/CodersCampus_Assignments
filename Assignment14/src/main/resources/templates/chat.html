@@ -50,19 +50,15 @@
 		 	.then((response) =>{
 		 		return response.json()
 		 	})
-		 	.then((data)=>{	
+		 	.then((data) =>{
 		 		document.getElementById('message_board').innerHTML = "";
-		 		console.log(JSON.stringify(data));
-		 		
-		 		data.map(function(value, key){
+		 		for (const [key, value] of Object.entries(data)) {
 		 			if(key === channelId){
-		 				key.forEach(element =>{
-		 					document.getElementById('message_board').innerHTML += "<p>"+ element.user.name+" : "+element.message+"</p>";
+		 				value.forEach(element =>{
+		 					document.getElementById('message_board').innerHTML += "<div>"+ element.user.name +": "+ element.message+"</div>";
 		 				})
 		 			}
-		 		
-		 		})
-		
+		 		}
 		 	})
 		}
 		

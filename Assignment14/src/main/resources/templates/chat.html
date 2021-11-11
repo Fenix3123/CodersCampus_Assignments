@@ -24,7 +24,7 @@
 		let text = window.location.href;
 		const myArray = text.split("/");
 		var channelId = myArray[4];
-		
+		setInterval(fetchFunc, 500);
 		function myFunction() {
 			var msg = document.getElementById('message').value
 			
@@ -41,7 +41,6 @@
 				body: JSON.stringify(obj)
 			})
 			console.log('This is my link: '+ window.location.href)
-		 setInterval(fetchFunc, 500);
 		}
 		
 		function fetchFunc() {

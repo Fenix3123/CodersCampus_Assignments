@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 	<head>
 		<title>Dashboard</title>
 	</head>
 	
 	<body>
 		<h1>Dashboard</h1>
+		
+		<form action="/movie" method="post">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+				<div>
+					movie name: <input type="text" th:field="${movie.name}" />
+				</div>
+				<div>
+					movie rating: <input type="text" th:field="${movie.rating}" />
+				</div>
+				<div>
+					Date of watch: <input type="date" th:field="${movie.date}" />
+				</div>
+				<button type="submit">submit</button>
+				<hr/>
+		</form>
+		
+		<form method="post" action="/logout">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+			<button type="submit">logout</button>
+		</form>
 	</body>
 </html>

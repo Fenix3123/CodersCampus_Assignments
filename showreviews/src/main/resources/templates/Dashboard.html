@@ -16,7 +16,28 @@
 					movie rating: <input type="text" th:field="${movie.rating}" />
 				</div>
 				<div>
-					Date of watch: <input type="date" th:field="${movie.date}" />
+					Date of watch: <input type="date" name="dateofwatch" />
+				</div>
+				<button type="submit">submit</button>
+				<hr/>
+		</form>
+		
+		<form action="/tvshow" method="post">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+				<div>
+					series name: <input type="text" th:field="${tvshow.name}" />
+				</div>
+				<div>
+					series rating: <input type="text" th:field="${tvshow.rating}" />
+				</div>
+				<div>
+					Date of watch: <input type="date" name="dateofwatch" />
+				</div>
+				<div>
+					Season: <input type="number" th:field="${tvshow.season}" />
+				</div>
+				<div>
+					episode: <input type="number" th:field="${tvshow.episode}" />
 				</div>
 				<button type="submit">submit</button>
 				<hr/>

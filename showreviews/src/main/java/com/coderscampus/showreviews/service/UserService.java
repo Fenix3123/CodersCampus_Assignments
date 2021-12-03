@@ -1,5 +1,7 @@
 package com.coderscampus.showreviews.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,4 +16,11 @@ public class UserService {
 	public User saveUser(User user) {
 		return userRepo.save(user);
 	}
+
+	public User findById(Long id) {
+		// TODO Auto-generated method stub
+		Optional<User> userOpt = userRepo.findById(id);
+		return userOpt.orElse(new User());
+	}
+	
 }

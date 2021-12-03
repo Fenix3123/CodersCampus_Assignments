@@ -8,5 +8,7 @@ import com.coderscampus.showreviews.domain.User;
 public interface UserRepository extends JpaRepository<User, Long>{
 	@Query("select u from User u"+ " left join fetch u.authorities"+ " where u.username = :username")
 	User findByUsername(String username);
+	
+	
 
 }

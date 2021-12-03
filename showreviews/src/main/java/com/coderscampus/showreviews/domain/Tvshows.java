@@ -1,5 +1,6 @@
 package com.coderscampus.showreviews.domain;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +21,7 @@ public class Tvshows {
 	private String rating;
 	private int season;
 	private int episode;
-	private Date date;
+	private LocalDate date;
 	private List<User> users = new ArrayList<>();
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -54,10 +55,10 @@ public class Tvshows {
 	public void setEpisode(int episode) {
 		this.episode = episode;
 	}
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 	

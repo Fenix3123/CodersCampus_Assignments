@@ -1,7 +1,9 @@
 package com.coderscampus.showreviews.web;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,6 +19,7 @@ import com.coderscampus.showreviews.service.MoviesService;
 import com.coderscampus.showreviews.service.TvshowsService;
 import com.coderscampus.showreviews.service.UserService;
 
+
 @Controller
 public class DashboardController {
 	@Autowired
@@ -30,6 +33,9 @@ public class DashboardController {
 	public String getDashBoard(ModelMap model) {
 		model.put("movie", new Movies());
 		model.put("tvshow", new Tvshows());
+		//movies
+		List<Movies> movieList = moviesService.findAll();		
+		model.put("movieList", movieList);
 		return "Dashboard";
 	}
 	
@@ -37,7 +43,8 @@ public class DashboardController {
 	public String saveMovie(@AuthenticationPrincipal User user, Movies movie, String dateofwatch) {
 		LocalDate localDate = LocalDate.parse(dateofwatch);
 		movie.setDate(localDate);
-		movie.getUsers().add(userService.findById(user.getId()));
+		user = userService.findById(user.getId());
+		movie.getUsers().add(user);
 		user.getMovies().add(movie);
 		moviesService.saveMovies(movie);
 		return "redirect:/dashboard";
@@ -47,7 +54,8 @@ public class DashboardController {
 	public String saveTvshow(@AuthenticationPrincipal User user, Tvshows tvshow, String dateofwatch) {
 		LocalDate localDate = LocalDate.parse(dateofwatch);
 		tvshow.setDate(localDate);
-		tvshow.getUsers().add(userService.findById(user.getId()));
+		user = userService.findById(user.getId());
+		tvshow.getUsers().add(user);
 		user.getTvshows().add(tvshow);
 		tvService.saveTvshows(tvshow);
 		return "redirect:/dashboard";

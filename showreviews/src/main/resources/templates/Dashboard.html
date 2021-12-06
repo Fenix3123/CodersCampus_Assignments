@@ -2,6 +2,9 @@
 <html xmlns:th="http://thymeleaf.org">
 	<head>
 		<title>Dashboard</title>
+		<style>
+			
+		</style>
 	</head>
 	
 	<body>
@@ -42,6 +45,19 @@
 				<button type="submit">submit</button>
 				<hr/>
 		</form>
+		
+		<table border="1">
+			<tr>
+				<th>Name</th>
+				<th>Rating</th>
+				<th>date of watch</th>
+			</tr>
+			<tr th:each="movieItem: ${movieList}">
+				<th th:text="${movieItem.name}"></th>
+				<th th:text="${movieItem.rating}"></th>
+				<th th:text="${movieItem.date}"></th>
+			</tr>
+		</table>
 		
 		<form method="post" action="/logout">
 			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>

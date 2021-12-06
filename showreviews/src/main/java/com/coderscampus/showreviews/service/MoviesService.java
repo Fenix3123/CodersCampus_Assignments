@@ -1,11 +1,10 @@
 package com.coderscampus.showreviews.service;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.coderscampus.showreviews.domain.Authorities;
 import com.coderscampus.showreviews.domain.Movies;
-import com.coderscampus.showreviews.repositories.AuthoritiesRepository;
 import com.coderscampus.showreviews.repositories.MoviesRepository;
 
 @Service
@@ -15,5 +14,10 @@ public class MoviesService {
 	
 	public Movies saveMovies(Movies movie) {
 		return moviesRepo.save(movie);
+	}
+
+	public List<Movies> findAll() {
+		// TODO Auto-generated method stub
+		return moviesRepo.findAll();
 	}
 }

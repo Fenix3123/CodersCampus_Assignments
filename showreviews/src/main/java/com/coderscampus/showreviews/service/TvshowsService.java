@@ -1,8 +1,11 @@
 package com.coderscampus.showreviews.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.coderscampus.showreviews.domain.Movies;
 import com.coderscampus.showreviews.domain.Tvshows;
 import com.coderscampus.showreviews.repositories.TvshowsRepository;
 
@@ -13,5 +16,10 @@ public class TvshowsService {
 	
 	public Tvshows saveTvshows(Tvshows tv) {
 		return tvRepo.save(tv);
+	}
+	
+	public Tvshows findById(Long tvId) {
+		Optional<Tvshows> tvOpt = tvRepo.findById(tvId);
+		return tvOpt.orElse(new Tvshows());
 	}
 }

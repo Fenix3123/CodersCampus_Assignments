@@ -2,8 +2,21 @@
 <html xmlns:th="http://thymeleaf.org">
 	<head>
 		<title>Create Account</title>
+		<style>
+			body{
+				background-color: grey;
+			}
+			
+			.Container{
+				margin: 20px 100px 100px 100px;
+				background-color: white;
+				border: 5px solid black;
+				padding-bottom: 20px;
+			}
+		</style>
 	</head>
 	<body>
+	  <div class="Container">
 		<h1>Create Your Account</h1>
 		
 		<form action="/register" method="post">
@@ -18,5 +31,8 @@
 				<input type="submit" value="Create Account" />
 			</div>
 		</form>
+		
+		<a th:href="@{/login}">Click to login</a>
+	  </div>
 	</body>
 </html>

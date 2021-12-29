@@ -43,6 +43,20 @@ public class DashboardController {
 		return "Dashboard";
 	}
 	
+	@GetMapping("/dashboard2")
+	public String getDashBoard2(@AuthenticationPrincipal User user, ModelMap model) {
+		model.put("movie", new Movies());
+		model.put("tvshow", new Tvshows());
+		model.put("user", user);
+		//movies
+		user = userService.findById(user.getId());
+		List<Movies> movieList = user.getMovies();	
+		List<Tvshows> tvList = user.getTvshows();
+		model.put("movieList", movieList);
+		model.put("tvList", tvList);
+		return "Dashboard2";
+	}
+	
 	@PostMapping("/movie")
 	public String saveMovie(@AuthenticationPrincipal User user, Movies movie, String dateofwatch) {
 		LocalDate localDate = LocalDate.parse(dateofwatch);
@@ -118,10 +132,10 @@ public class DashboardController {
 	}
 	
 	@PostMapping("/{userId}/tvshow/{tvId}")
-	public String getTvshow(Tvshows tvshow, String dateofwatch) {
+	public String getTvshow(Tvshows tvshow, String dateofwatch, @PathVariable Long userId) {
 		LocalDate localDate = LocalDate.parse(dateofwatch);
 		tvshow.setDate(localDate);
 		tvService.saveTvshows(tvshow);
-		return "redirect:/tvshow/"+tvshow.getId();
+		return "redirect:/"+userId+"/tvshow/"+tvshow.getId();
 	}
 }

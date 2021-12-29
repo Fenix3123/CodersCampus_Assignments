@@ -48,9 +48,11 @@
 				display:flex;
 				justify-content: flex-end;
 				background-color: var(--secondary-color);
+				display: flex;
 			}
 
 			.search{
+				flex: 1;
 				background-color: transparent;
 				border: 2px solid var(--primary-color);
 				padding:0.5rem 1rem;
@@ -60,7 +62,18 @@
 				font-family: inherit;
 				width: 300px;
 			}
-
+			
+			.logout{
+				flex: 1;
+			   background-color: grey;
+			   border: 2px solid var(--primary-color);
+			   padding:0.5rem 1rem;
+			   border-radius: 50px;
+			   font-size: 1rem;
+			   color: black;
+			   font-family: inherit;
+			   width: 300px;
+			}
 			.search:focus{
 				outline:0;
 				background-color: var(--primary-color);
@@ -298,4 +311,21 @@
 
 			.dots .dot.active{
 				border-color: orange;
+			}
+			.movieform{
+				flex: 1;
+			}
+			.tvform{
+				flex: 1;
+			}
+			.switchbutton{
+				flex: 1;
+				background-color: green;
+				border: 2px solid var(--primary-color);
+				padding:0.5rem 1rem;
+				border-radius: 50px;
+				font-size: 1rem;
+				color: black;
+				font-family: inherit;
+				width: 300px;
 			}

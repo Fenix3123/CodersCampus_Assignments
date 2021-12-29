@@ -32,7 +32,7 @@
 					rating: <input type="text" th:field="${tvItem.rating}"/>
 				</div>
 				<div>
-					Date of watch: <input type="date" name="dateofwatch" />
+					Date of watch: <input type="date" name="dateofwatch" th:value="${tvItem.date}"/>
 				</div>
 				<div>
 					season: <input type="number" th:field="${tvItem.season}"/>

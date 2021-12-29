@@ -32,7 +32,7 @@
 					rating: <input type="text" th:field="${movieItem.rating}"/>
 				</div>
 				<div>
-					Date of watch: <input type="date" name="dateofwatch" />
+					Date of watch: <input type="date" name="dateofwatch" th:value="${movieItem.date}"/>
 				</div>
 				<hr/>
 				<button type="submit">Update movie</button>

@@ -255,7 +255,7 @@ function openNav(tvshow) {
         })
         
         var content = `
-        <h1 class="no-results">${tvShow.original_title}</h1>
+        <h1 class="no-results">${tvshow.original_name}</h1>
         <br/>
         
         ${embed.join('')}

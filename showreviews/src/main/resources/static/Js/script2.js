@@ -211,7 +211,9 @@ function showTvShows(data) {
             <div class="overview">
 
                 <h3>Overview</h3>
+				<p>
                 ${overview}
+				</p>
                 <br/> 
                 <button class="know-more" id="${id}">Know More</button> 
             </div>
@@ -349,7 +351,7 @@ form.addEventListener('submit', (e) => {
     if(searchTerm) {
         getTvshows(searchURL+'&query='+searchTerm)
     }else{
-        getTvShows(API_URL);
+        getTvshows(API_URL);
     }
 
 })

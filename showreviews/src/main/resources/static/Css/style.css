@@ -266,7 +266,23 @@
 				  top: 15px;
 				  right: 35px;
 				}
+				.movieContainer{
+				margin: 0px;
+				}
+				.search{
+				width: 100px;
+				}
+				.logout{
+				width: 100px;
+				}
+				.movie{
+				width:150px;
+				}
+				.overview p{
+				 font-size: 12px;
+				}
 			  }
+			  
 
 
 			  .embed.hide{

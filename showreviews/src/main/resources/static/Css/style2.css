@@ -266,6 +266,24 @@
 				  top: 15px;
 				  right: 35px;
 				}
+				
+				.tvContainer{
+				margin: 0px;
+				}
+				.search{
+				width: 100px;
+				}
+				.logout{
+				width: 100px;
+				}
+				
+				.tvShow{
+				width:150px;
+				}
+				
+				.overview p{
+				 font-size: 11px;
+				}
 			  }
 
 

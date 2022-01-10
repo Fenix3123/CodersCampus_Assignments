@@ -23,11 +23,7 @@ import com.coderscampus.showreviews.service.UserService;
 @Controller
 public class DashboardController {
 	@Autowired
-	MoviesService moviesService;
-	@Autowired
-	TvshowsService tvService;
-	@Autowired
-	UserService userService;
+	private UserService userService;
 	
 	@GetMapping("/dashboard")
 	public String getDashBoard(@AuthenticationPrincipal User user, ModelMap model) {
@@ -57,85 +53,9 @@ public class DashboardController {
 		return "Dashboard2";
 	}
 	
-	@PostMapping("/movie")
-	public String saveMovie(@AuthenticationPrincipal User user, Movies movie, String dateofwatch) {
-		LocalDate localDate = LocalDate.parse(dateofwatch);
-		movie.setDate(localDate);
-		user = userService.findById(user.getId());
-		movie.getUsers().add(user);
-		user.getMovies().add(movie);
-		moviesService.saveMovies(movie);
-		return "redirect:/dashboard";
-	}
 	
-	@PostMapping("/{userId}/movie/{movieId}/delete")
-	public String deleteOneMovie (@PathVariable Long movieId, @PathVariable Long userId) {
-		User user = userService.findById(userId);
-		user.setMovies(user.getMovies().stream()
-									   .filter(movie ->{
-										   String str1 = String.valueOf(movie.getId());
-										   String str2 = String.valueOf(movieId);
-										   return !str1.equals(str2);
-									   })
-									   .collect(Collectors.toList()));
-		userService.saveUser(user);
-		return "redirect:/dashboard";
-	}
 	
-	@PostMapping("/{userId}/tvshow/{tvId}/delete")
-	public String deleteOneTv (@PathVariable Long tvId, @PathVariable Long userId) {
-		User user = userService.findById(userId);
-		user.setTvshows(user.getTvshows().stream()
-									   .filter(tv ->{
-										   String str1 = String.valueOf(tv.getId());
-										   String str2 = String.valueOf(tvId);
-										   return !str1.equals(str2);
-									   })
-									   .collect(Collectors.toList()));
-		userService.saveUser(user);
-		return "redirect:/dashboard";
-	}
 	
-	@PostMapping("/tvshow")
-	public String saveTvshow(@AuthenticationPrincipal User user, Tvshows tvshow, String dateofwatch) {
-		LocalDate localDate = LocalDate.parse(dateofwatch);
-		tvshow.setDate(localDate);
-		user = userService.findById(user.getId());
-		tvshow.getUsers().add(user);
-		user.getTvshows().add(tvshow);
-		tvService.saveTvshows(tvshow);
-		return "redirect:/dashboard";
-	}
 	
-	@GetMapping("/{userId}/movie/{movieId}")
-	public String getMovie(ModelMap model, @PathVariable Long movieId, @AuthenticationPrincipal User user) {
-		Movies movie = moviesService.findById(movieId);
-		model.put("user", user);
-		model.put("movieItem", movie);
-		return "/movieview";
-	}
 	
-	@PostMapping("/{userId}/movie/{movieId}")
-	public String getMovie(Movies movie, String dateofwatch, @PathVariable Long userId) {
-		LocalDate localDate = LocalDate.parse(dateofwatch);
-		movie.setDate(localDate);
-		moviesService.saveMovies(movie);
-		return "redirect:/"+userId+"/movie/"+movie.getId();
-	}
-	
-	@GetMapping("/{userId}/tvshow/{tvId}")
-	public String getTvshow(ModelMap model, @PathVariable Long tvId, @AuthenticationPrincipal User user) {
-		Tvshows tv = tvService.findById(tvId);
-		model.put("user", user);
-		model.put("tvItem", tv);
-		return "tvshowview";
-	}
-	
-	@PostMapping("/{userId}/tvshow/{tvId}")
-	public String getTvshow(Tvshows tvshow, String dateofwatch, @PathVariable Long userId) {
-		LocalDate localDate = LocalDate.parse(dateofwatch);
-		tvshow.setDate(localDate);
-		tvService.saveTvshows(tvshow);
-		return "redirect:/"+userId+"/tvshow/"+tvshow.getId();
-	}
 }

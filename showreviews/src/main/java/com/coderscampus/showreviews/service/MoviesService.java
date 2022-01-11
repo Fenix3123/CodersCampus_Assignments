@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.coderscampus.showreviews.domain.Movies;
+import com.coderscampus.showreviews.domain.User;
 import com.coderscampus.showreviews.repositories.MoviesRepository;
 
 @Service
@@ -30,5 +31,9 @@ public class MoviesService {
 	
 	public void delete(Long movieId) {
 		moviesRepo.deleteById(movieId);
+	}
+	
+	public List<Movies> findByUsers(User user){
+		return moviesRepo.findByUsers(user);
 	}
 }

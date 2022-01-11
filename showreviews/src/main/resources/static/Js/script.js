@@ -226,6 +226,9 @@ function showMovies(data) {
 				</p>
                 <br/> 
                 <button class="know-more" id="${id}">Know More</button>`
+
+			
+				
 			
 			
 
@@ -241,17 +244,19 @@ function showMovies(data) {
     })
 }
 
-ifItExists()
+ifItExists();
 
 function ifItExists(){
-	fetch('http://localhost:8080/getMovieList')
+	fetch('http://localhost:8080/getMovieList',{
+		method: "GET",
+		headers:{
+			"Content-Type": "application/json"
+		}
+		})
 			.then((response)=>{
-				response.json();
+				console.log(response.json());
 			})
-			.then((movielist)=>{
-				console.log("this is a list: ", movielist);
-				
-			})
+			
 			
 }
 const overlayContent = document.getElementById('overlay-content');

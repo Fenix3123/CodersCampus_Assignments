@@ -69,7 +69,8 @@ public class MovieController {
 	@GetMapping("/getMovieList")
 	@ResponseBody
 	public List getMovieList(@AuthenticationPrincipal User user) {
-		System.out.println(moviesService.findAll());
-		return moviesService.findAll();
+		user = userService.findById(user.getId());
+		List <Movies> obj = moviesService.findByUsers(user);
+		return obj;
 	}
 }

@@ -68,9 +68,16 @@ public class MovieController {
 	
 	@GetMapping("/getMovieList")
 	@ResponseBody
-	public List getMovieList(@AuthenticationPrincipal User user) {
+	public List<Movies> getMovieList(@AuthenticationPrincipal User user) {
 		user = userService.findById(user.getId());
-		List <Movies> obj = moviesService.findByUsers(user);
-		return obj;
+		List <Movies> movieList = moviesService.findByUsers(user);
+		return movieList;
+	}
+	
+	@PostMapping("/markMovie")
+	public String markMovie(ModelMap model, Movies movie) {
+		System.out.println(movie);
+		model.put("markMovie", movie);
+		return "/movieview2";
 	}
 }

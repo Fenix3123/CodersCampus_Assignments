@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,6 +51,7 @@ public class Movies {
 	}
 	
 	@ManyToMany(mappedBy = "movies", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JsonIgnore
 	public List<User> getUsers() {
 		return users;
 	}

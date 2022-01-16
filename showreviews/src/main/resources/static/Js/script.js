@@ -224,14 +224,17 @@ function showMovies(data) {
 				<p>
                 ${overview}
 				</p>
-                <br/> 
-                <button class="know-more" id="${id}">Know More</button>`
-
+                
+                <button class="know-more" id="${id}">Know More</button>
+				<input type="button" class="know-more" id="unmark-${id}" value="unmark movie">
+				<input type="button" class="know-more" id="mark-${id}" value="mark movie">`
+				let markbutton = document.getElementById(id);
+				markbutton.addEventListener('click', enterMovie(movie));
+		
+			
+			ifItExists(id, title);
 			
 				
-			
-			
-
             movieEl.innerHTML += `</div>`;
         
 
@@ -244,9 +247,27 @@ function showMovies(data) {
     })
 }
 
-ifItExists();
+function enterMovie(movie){
+	let obj1 = {
+			"name": movie.name,
+			"rating": "How much would you rate the movie?",
+			"date": "When did you watch it?"
+		}
+		
+	fetch('http://localhost:8080/markMovie',{
+		method: "POST",
+		headers:{
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify(obj1)
+	}).then(response =>{
+				return response.text()
+			}).then(data => {
+				window.location.href = 'http://localhost:8080' + data
+			})
+}
 
-function ifItExists(){
+function ifItExists(movieTmbdId, movieTmbdName){
 	fetch('http://localhost:8080/getMovieList',{
 		method: "GET",
 		headers:{
@@ -254,7 +275,15 @@ function ifItExists(){
 		}
 		})
 			.then((response)=>{
-				console.log(response.json());
+				return response.json();
+			})
+			.then((data)=>{
+				data.forEach(movieItem =>{
+					if(movieTmbdName === movieItem.name)
+						document.getElementById("mark-"+movieTmbdId).style.display = "none";
+					else
+						document.getElementById("unmark-"+movieTmbdId).style.display = "none";
+				})
 			})
 			
 			

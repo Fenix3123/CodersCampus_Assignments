@@ -34,7 +34,7 @@ public class TvshowController {
 									   })
 									   .collect(Collectors.toList()));
 		userService.saveUser(user);
-		return "redirect:/dashboard";
+		return "redirect:/dashboard2";
 	}
 	
 	@PostMapping("/tvshow")
@@ -45,7 +45,7 @@ public class TvshowController {
 		tvshow.getUsers().add(user);
 		user.getTvshows().add(tvshow);
 		tvService.saveTvshows(tvshow);
-		return "redirect:/dashboard";
+		return "redirect:/dashboard2";
 	}
 	
 	

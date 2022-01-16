@@ -259,6 +259,10 @@
 				font-size: 60px;
 			  }
 			  
+			  .overview p{
+				 font-size: 13px;
+				}
+			  
 			  @media screen and (max-height: 450px) {
 				.overlay a {font-size: 20px}
 				.overlay .closebtn {
@@ -279,7 +283,7 @@
 				width:150px;
 				}
 				.overview p{
-				 font-size: 12px;
+				 font-size: 10px;
 				}
 			  }
 			  

@@ -46,8 +46,11 @@
 			<div class="page" id="next">Next Page</div>
 
 		</div>
-
+		
 		<script src="/Js/script.js"></script>
+		<script th:inline="javascript">
+			var token  = /*[[${_csrf.token}]]*/''
+		</script>
 	
 	<!-- Where it ends-->
 		 <h2>Enter your movies here </h2>

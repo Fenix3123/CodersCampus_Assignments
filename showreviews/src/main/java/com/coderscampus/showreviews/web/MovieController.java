@@ -11,12 +11,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coderscampus.showreviews.domain.Movies;
 import com.coderscampus.showreviews.domain.User;
 import com.coderscampus.showreviews.service.MoviesService;
 import com.coderscampus.showreviews.service.UserService;
+
 
 @Controller
 public class MovieController {
@@ -75,9 +77,14 @@ public class MovieController {
 	}
 	
 	@PostMapping("/markMovie")
-	public String markMovie(ModelMap model, Movies movie) {
-		System.out.println(movie);
-		model.put("markMovie", movie);
+	@ResponseBody
+	public String markMovie(ModelMap model) {
+		//model.put("markMovie", movie);
 		return "/movieview2";
+	}
+	
+	@GetMapping("/movieview2")
+	public String getMovieView2(ModelMap model) {
+		return "movieview2";
 	}
 }

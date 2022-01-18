@@ -228,8 +228,6 @@ function showMovies(data) {
                 <button class="know-more" id="${id}">Know More</button>
 				<input type="button" class="know-more" id="unmark-${id}" value="unmark movie">
 				<input type="button" class="know-more" id="mark-${id}" value="mark movie">`
-				let markbutton = document.getElementById(id);
-				markbutton.addEventListener('click', enterMovie(movie));
 		
 			
 			ifItExists(id, title);
@@ -239,7 +237,10 @@ function showMovies(data) {
         
 
         main.appendChild(movieEl);
-
+		
+		let markbutton = document.getElementById("mark-"+id);
+		markbutton.addEventListener('click', enterMovie(movie));
+		
         document.getElementById(id).addEventListener('click', () => {
           console.log(id)
           openNav(movie)
@@ -247,24 +248,27 @@ function showMovies(data) {
     })
 }
 
+//var token = $("meta[name='_csrf']").attr("content");
+//var header = $("meta[name='_csrf_header']").attr("content");
 function enterMovie(movie){
 	let obj1 = {
 			"name": movie.name,
 			"rating": "How much would you rate the movie?",
 			"date": "When did you watch it?"
 		}
-		
+			
 	fetch('http://localhost:8080/markMovie',{
 		method: "POST",
 		headers:{
-			"Content-Type": "application/json"
+			"Content-Type": "application/json",
+			"X-CSRF-TOKEN": token
 		},
 		body: JSON.stringify(obj1)
 	}).then(response =>{
-				return response.text()
-			}).then(data => {
-				window.location.href = 'http://localhost:8080' + data
-			})
+		return response.text()
+	}).then(data => {
+		window.location.href = 'http://localhost:8080' + data;
+	})
 }
 
 function ifItExists(movieTmbdId, movieTmbdName){
@@ -442,4 +446,20 @@ function pageCall(page){
     let url = urlSplit[0] +'?'+ b
     getMovies(url);
   }
+}
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }

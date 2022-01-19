@@ -78,7 +78,8 @@ public class MovieController {
 	
 	@PostMapping("/markMovie")
 	@ResponseBody
-	public String markMovie(ModelMap model) {
+	public String markMovie(ModelMap model, @RequestBody Movies movie) {
+		//Movies move = movie;
 		//model.put("markMovie", movie);
 		return "/movieview2";
 	}

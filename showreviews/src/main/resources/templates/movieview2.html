@@ -1,6 +1,41 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+	<head>
+		<title>Edit this movie</title>
+		<style>
+			body{
+				background-color: grey;
+				font-family: 'Poppins', sans-serif;
+			}
+			
+			.Container{
+				margin: 20px 100px 100px 100px;
+				background-color: white;
+				border: 5px solid black;
+				padding-left: 20px;
+			}
+		</style>
+	</head>
 	<body>
-	<h1> hello world</h1>
+	   <div class="Container">
+		<h1>Edit this movie</h1>
+
+		<form action="" method="post">
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+				<div>
+					Movie name: <input type="text">
+				</div>
+				<div>
+					rating: <input type="text"/>
+				</div>
+				<div>
+					Date of watch: <input type="date" name="dateofwatch"/>
+				</div>
+				<hr/>
+				<button type="submit">Update movie</button>
+		</form>
+		
+		<a th:href="@{/dashboard}">Go back</a>
+	  </div>
 	</body>
 </html>
-

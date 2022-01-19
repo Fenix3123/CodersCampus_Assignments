@@ -239,14 +239,16 @@ function showMovies(data) {
         main.appendChild(movieEl);
 		
 		let markbutton = document.getElementById("mark-"+id);
-		markbutton.addEventListener('click', enterMovie(movie));
+		markbutton.addEventListener('click', () => {
+			enterMovie(movie);
+		})
 		
         document.getElementById(id).addEventListener('click', () => {
           console.log(id)
           openNav(movie)
         })
     })
-}
+}//showmovies
 
 //var token = $("meta[name='_csrf']").attr("content");
 //var header = $("meta[name='_csrf_header']").attr("content");
@@ -283,10 +285,14 @@ function ifItExists(movieTmbdId, movieTmbdName){
 			})
 			.then((data)=>{
 				data.forEach(movieItem =>{
-					if(movieTmbdName === movieItem.name)
+					if(movieTmbdName === movieItem.name){
+						document.getElementById("unmark-"+movieTmbdId).style.display = "";
 						document.getElementById("mark-"+movieTmbdId).style.display = "none";
-					else
+					}
+					else{
+						document.getElementById("mark-"+movieTmbdId).style.display = "";
 						document.getElementById("unmark-"+movieTmbdId).style.display = "none";
+					}
 				})
 			})
 			

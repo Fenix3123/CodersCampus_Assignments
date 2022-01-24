@@ -30,6 +30,11 @@
 				display: flex;
 			}
 			
+			.listContainer input {
+  				width: 100%;
+  				clear: both;
+			}
+			
 			.movieList{
 				flex: 1;
 			}
@@ -266,6 +271,11 @@
 				  top: 15px;
 				  right: 35px;
 				}
+				
+				input {
+  				width: 100%;
+  				clear: both;
+			    }
 				
 				.tvContainer{
 				margin: 0px;

@@ -47,6 +47,9 @@
 		</div>
 
 		<script src="/Js/script2.js"></script>
+		<script th:inline="javascript">
+			var token  = /*[[${_csrf.token}]]*/''
+		</script>
 	
 	<!-- Where it ends-->
 		 <h2>Enter your movies here </h2>

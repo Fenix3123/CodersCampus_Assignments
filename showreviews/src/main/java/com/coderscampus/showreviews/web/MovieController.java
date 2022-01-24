@@ -52,6 +52,23 @@ public class MovieController {
 		return "redirect:/dashboard";
 	}
 	
+	@PostMapping("/deleteMovie")
+	@ResponseBody
+	public String deleteOneMovie2 (@AuthenticationPrincipal User user, @RequestBody String moviename) {
+		User user2 = userService.findById(user.getId());
+		int namesize = moviename.length();
+		String movieNameActual = moviename.substring(1, namesize-1);
+		user2.setMovies(user2.getMovies().stream()
+									   .filter(movie ->{
+										   String str1 = String.valueOf(movie.getName());
+										   String str2 = String.valueOf(movieNameActual);
+										   return !str1.equals(str2);
+									   })
+									   .collect(Collectors.toList()));
+		userService.saveUser(user2);
+		return "/dashboard";
+	}
+	
 	@GetMapping("/{userId}/movie/{movieId}")
 	public String getMovie(ModelMap model, @PathVariable Long movieId, @AuthenticationPrincipal User user) {
 		Movies movie = moviesService.findById(movieId);
@@ -76,16 +93,21 @@ public class MovieController {
 		return movieList;
 	}
 	
-	@PostMapping("/markMovie")
-	@ResponseBody
-	public String markMovie(ModelMap model, @RequestBody Movies movie) {
-		//Movies move = movie;
-		//model.put("markMovie", movie);
-		return "/movieview2";
-	}
 	
 	@GetMapping("/movieview2")
 	public String getMovieView2(ModelMap model) {
+		model.put("movieItem", new Movies());
 		return "movieview2";
+	}
+	
+	@PostMapping("/movieview2")
+	public String postMovieView2(@AuthenticationPrincipal User user, Movies movie, String dateofwatch) {
+		LocalDate localDate = LocalDate.parse(dateofwatch);
+		movie.setDate(localDate);
+		user = userService.findById(user.getId());
+		movie.getUsers().add(user);
+		user.getMovies().add(movie);
+		moviesService.saveMovies(movie);
+		return "redirect:/dashboard";
 	}
 }

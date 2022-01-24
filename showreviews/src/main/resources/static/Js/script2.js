@@ -1,13 +1,13 @@
 //TMDB 
 
 const API_KEY = 'api_key=1cf50e6248dc270629e802686245c2c8';
-const BASE_URL = 'https://api.themoviedb.org/3';
-const API_URL = BASE_URL + '/discover/tv?sort_by=popularity.desc&'+API_KEY;
+const BASE_URL_TV = 'https://api.themoviedb.org/3';
+const API_URL_TV = BASE_URL_TV + '/discover/tv?sort_by=popularity.desc&'+API_KEY;
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
-const searchURL = BASE_URL + '/search/tv?'+API_KEY;
+const searchURL_TV = BASE_URL_TV + '/search/tv?'+API_KEY;
 
 
-const genres = [
+const genresTv = [
 	{
 	"id":10759,
 	"name":"Action & Adventure"
@@ -90,10 +90,10 @@ var lastUrl = '';
 var totalPages = 100;
 
 var selectedGenre = []
-setGenre();
-function setGenre() {
+setGenreTv();
+function setGenreTv() {
     tagsEl.innerHTML= '';
-    genres.forEach(genre => {
+    genresTv.forEach(genre => {
         const t = document.createElement('div');
         t.classList.add('tag');
         t.id=genre.id;
@@ -113,19 +113,19 @@ function setGenre() {
                 }
             }
             console.log(selectedGenre)
-            getTvshows(API_URL + '&with_genres='+encodeURI(selectedGenre.join(',')))
-            highlightSelection()
+            getTvshows(API_URL_TV + '&with_genres='+encodeURI(selectedGenre.join(',')))
+            highlightSelectionTv()
         })
         tagsEl.append(t);
     })
 }
 
-function highlightSelection() {
+function highlightSelectionTv() {
     const tags = document.querySelectorAll('.tag');
     tags.forEach(tag => {
         tag.classList.remove('highlight')
     })
-    clearBtn()
+    clearBtnTv()
     if(selectedGenre.length !=0){   
         selectedGenre.forEach(id => {
             const hightlightedTag = document.getElementById(id);
@@ -135,10 +135,10 @@ function highlightSelection() {
 
 }
 
-function clearBtn(){
-    let clearBtn = document.getElementById('clear');
-    if(clearBtn){
-        clearBtn.classList.add('highlight')
+function clearBtnTv(){
+    let clearBtnTv = document.getElementById('clear');
+    if(clearBtnTv){
+        clearBtnTv.classList.add('highlight')
     }else{
             
         let clear = document.createElement('div');
@@ -147,15 +147,15 @@ function clearBtn(){
         clear.innerText = 'Clear x';
         clear.addEventListener('click', () => {
             selectedGenre = [];
-            setGenre();            
-            getTvshows(API_URL);
+            setGenreTv();            
+            getTvshows(API_URL_TV);
         })
         tagsEl.append(clear);
     }
     
 }
 
-getTvshows(API_URL);
+getTvshows(API_URL_TV);
 
 function getTvshows(url) {
   lastUrl = url;
@@ -197,7 +197,6 @@ function showTvShows(data) {
 
     data.forEach(tvshow => {
         const {name, poster_path, vote_average, overview, id} = tvshow;
-		console.log(name);
         const tvEl = document.createElement('div');
         tvEl.classList.add('tvShow');
         tvEl.innerHTML = `
@@ -216,24 +215,90 @@ function showTvShows(data) {
 				</p>
                 <br/> 
                 <button class="know-more" id="${id}">Know More</button> 
-            </div>
-        
-        `
-
+            	<input type="button" class="know-more" id="unmark-${id}" value="unmark Tvshow">
+				<input type="button" class="know-more" id="mark-${id}" value="mark Tvshow">
+				</div>`
+		
+		
+		
         main.appendChild(tvEl);
 
+		ifItExists(id, name);
+		
+		let markbutton = document.getElementById("mark-"+id);
+		markbutton.addEventListener('click', () => {
+			enterTvshow(tvshow);
+		})
+		
+		let unmarkbutton = document.getElementById("unmark-"+id);
+		unmarkbutton.addEventListener('click', () => {
+			deleteTvshow(tvshow);
+		})
+		
         document.getElementById(id).addEventListener('click', () => {
           console.log(id)
-          openNav(tvshow)
+          openNavTv(tvshow)
         })
     })
 }
 
+function enterTvshow(Tvshow){
+	let obj1 = {
+			"name": Tvshow.name,
+			"rating": "How much would you rate the show?",
+			"date": "",
+			"season": 0,
+			"episode":0
+		}
+		sessionStorage.setItem("tvshowobject",JSON.stringify(obj1))
+		window.location.href = 'http://localhost:8080/tvshowview2';
+	
+}
+
+function deleteTvshow(Tvshow){
+	fetch('http://localhost:8080/deleteTvshow',{
+		method: "POST",
+		headers:{
+			"Content-Type": "application/json",
+			'X-CSRF-TOKEN': token
+		},
+		body: JSON.stringify(Tvshow.name)
+	}).then((response)=>{
+		return response.text();
+	}).then(data=>{
+		window.location.href = 'http://localhost:8080'+data;
+	})
+}
+
+function ifItExists(tvTmbdId, tvTmbdName){
+	fetch('http://localhost:8080/getTvshowList')
+		.then((response)=>{
+				return response.json();
+			})
+			.then((data)=>{
+				data.forEach(tvItem =>{
+					console.log(tvItem);
+					if(tvTmbdName === tvItem.name){
+						document.getElementById("unmark-"+tvTmbdId).style.display = "";
+						document.getElementById("mark-"+tvTmbdId).style.display = "none";
+					}
+					else{
+						document.getElementById("mark-"+tvTmbdId).style.display = "";
+						document.getElementById("unmark-"+tvTmbdId).style.display = "none";
+					}
+				})
+				if(data.length == 0){
+						document.getElementById("mark-"+tvTmbdId).style.display = "";
+						document.getElementById("unmark-"+tvTmbdId).style.display = "none";
+				}
+			})				
+}
+
 const overlayContent = document.getElementById('overlay-content');
 /* Open when someone clicks on the span element */
-function openNav(tvshow) {
+function openNavTv(tvshow) {
   let id = tvshow.id;
-  fetch(BASE_URL + '/tv/'+id+'/videos?'+API_KEY).then(res => res.json()).then(videoData => {
+  fetch(BASE_URL_TV + '/tv/'+id+'/videos?'+API_KEY).then(res => res.json()).then(videoData => {
     console.log(videoData);
     if(videoData){
       document.getElementById("myNav").style.width = "100%";
@@ -347,28 +412,28 @@ form.addEventListener('submit', (e) => {
 
     const searchTerm = search.value;
     selectedGenre=[];
-    setGenre();
+    setGenreTv();
     if(searchTerm) {
-        getTvshows(searchURL+'&query='+searchTerm)
+        getTvshows(searchURL_TV+'&query='+searchTerm)
     }else{
-        getTvshows(API_URL);
+        getTvshows(API_URL_TV);
     }
 
 })
 
 prev.addEventListener('click', () => {
   if(prevPage > 0){
-    pageCall(prevPage);
+    pageCallTv(prevPage);
   }
 })
 
 next.addEventListener('click', () => {
   if(nextPage <= totalPages){
-    pageCall(nextPage);
+    pageCallTv(nextPage);
   }
 })
 
-function pageCall(page){
+function pageCallTv(page){
   let urlSplit = lastUrl.split('?');
   let queryParams = urlSplit[1].split('&');
   let key = queryParams[queryParams.length -1].split('=');

@@ -1,6 +1,6 @@
 //TMDB 
 
-const API_KEY = 'api_key=f9a53ff30223a947806a7be97d01bd2d';
+const API_KEY = 'api_key=1cf50e6248dc270629e802686245c2c8';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_URL = BASE_URL + '/discover/movie?sort_by=popularity.desc&'+API_KEY;
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
@@ -229,18 +229,20 @@ function showMovies(data) {
 				<input type="button" class="know-more" id="unmark-${id}" value="unmark movie">
 				<input type="button" class="know-more" id="mark-${id}" value="mark movie">`
 		
-			
-			ifItExists(id, title);
-			
 				
-            movieEl.innerHTML += `</div>`;
+        movieEl.innerHTML += `</div>`;
         
-
-        main.appendChild(movieEl);
 		
+        main.appendChild(movieEl);
+		ifItExists(id, title);
 		let markbutton = document.getElementById("mark-"+id);
 		markbutton.addEventListener('click', () => {
 			enterMovie(movie);
+		})
+		
+		let unmarkbutton = document.getElementById("unmark-"+id);
+		unmarkbutton.addEventListener('click', () => {
+			deleteMovie(movie);
 		})
 		
         document.getElementById(id).addEventListener('click', () => {
@@ -250,30 +252,36 @@ function showMovies(data) {
     })
 }//showmovies
 
+
 //var token = $("meta[name='_csrf']").attr("content");
 //var header = $("meta[name='_csrf_header']").attr("content");
 function enterMovie(movie){
 	let obj1 = {
-			"name": movie.name,
+			"name": movie.title,
 			"rating": "How much would you rate the movie?",
-			"date": "When did you watch it?"
+			"date": ""
 		}
-			
-	fetch('http://localhost:8080/markMovie',{
+		sessionStorage.setItem("movieobject",JSON.stringify(obj1))
+		window.location.href = 'http://localhost:8080/movieview2';
+	
+}
+
+function deleteMovie(movie){
+	fetch('http://localhost:8080/deleteMovie',{
 		method: "POST",
 		headers:{
 			"Content-Type": "application/json",
-			"X-CSRF-TOKEN": token
+			'X-CSRF-TOKEN': token
 		},
-		body: JSON.stringify(obj1)
-	}).then(response =>{
-		return response.text()
-	}).then(data => {
-		window.location.href = 'http://localhost:8080' + data;
+		body: JSON.stringify(movie.title)
+	}).then((response)=>{
+		return response.text();
+	}).then(data=>{
+		window.location.href = 'http://localhost:8080'+data;
 	})
 }
 
-function ifItExists(movieTmbdId, movieTmbdName){
+function ifItExists(TmbdId, TmbdName){
 	fetch('http://localhost:8080/getMovieList',{
 		method: "GET",
 		headers:{
@@ -284,16 +292,21 @@ function ifItExists(movieTmbdId, movieTmbdName){
 				return response.json();
 			})
 			.then((data)=>{
-				data.forEach(movieItem =>{
-					if(movieTmbdName === movieItem.name){
-						document.getElementById("unmark-"+movieTmbdId).style.display = "";
-						document.getElementById("mark-"+movieTmbdId).style.display = "none";
+				data.forEach(Item =>{
+					if(TmbdName === Item.name){
+						document.getElementById("unmark-"+TmbdId).style.display = "";
+						document.getElementById("mark-"+TmbdId).style.display = "none";
 					}
 					else{
-						document.getElementById("mark-"+movieTmbdId).style.display = "";
-						document.getElementById("unmark-"+movieTmbdId).style.display = "none";
+						document.getElementById("mark-"+TmbdId).style.display = "";
+						document.getElementById("unmark-"+TmbdId).style.display = "none";
 					}
 				})
+				
+				if(data.length == 0){
+					document.getElementById("mark-"+TmbdId).style.display = "";
+					document.getElementById("unmark-"+TmbdId).style.display = "none";
+				}
 			})
 			
 			

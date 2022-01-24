@@ -30,6 +30,11 @@
 				display: flex;
 			}
 			
+			.listContainer input {
+  				width: 100%;
+  				clear: both;
+			}
+			
 			.movieList{
 				flex: 1;
 			}

@@ -243,14 +243,14 @@ function showTvShows(data) {
 }
 
 function enterTvshow(Tvshow){
-	let obj1 = {
+	let tvshowObject = {
 			"name": Tvshow.name,
 			"rating": "How much would you rate the show?",
 			"date": "",
 			"season": 0,
 			"episode":0
 		}
-		sessionStorage.setItem("tvshowobject",JSON.stringify(obj1))
+		sessionStorage.setItem("tvshowobject",JSON.stringify(tvshowObject))
 		window.location.href = 'http://localhost:8080/tvshowview2';
 	
 }

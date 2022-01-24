@@ -2,19 +2,7 @@
 <html xmlns:th="http://thymeleaf.org">
 	<head>
 		<title>Edit this show</title>
-		<style>
-			body{
-				background-color: grey;
-				font-family: 'Poppins', sans-serif;
-			}
-			
-			.Container{
-				margin: 20px 100px 100px 100px;
-				background-color: white;
-				border: 5px solid black;
-				padding-left: 20px;
-			}
-		</style>
+		<link rel="stylesheet" href="/Css/container.css">
 		
 		<script type="text/javascript">
 		var obj1 = sessionStorage.getItem("tvshowobject");
@@ -47,7 +35,7 @@
 				<button type="submit">Submit show</button>
 		</form>
 		
-		<a th:href="@{/dashboard}">Go back</a>
+		<a th:href="@{/dashboard2}">Go back</a>
 	  </div>
 	</body>
 	

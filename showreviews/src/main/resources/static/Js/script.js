@@ -256,12 +256,12 @@ function showMovies(data) {
 //var token = $("meta[name='_csrf']").attr("content");
 //var header = $("meta[name='_csrf_header']").attr("content");
 function enterMovie(movie){
-	let obj1 = {
+	let movieObject = {
 			"name": movie.title,
 			"rating": "How much would you rate the movie?",
 			"date": ""
 		}
-		sessionStorage.setItem("movieobject",JSON.stringify(obj1))
+		sessionStorage.setItem("movieobject",JSON.stringify(movieObject))
 		window.location.href = 'http://localhost:8080/movieview2';
 	
 }
@@ -291,8 +291,8 @@ function ifItExists(TmbdId, TmbdName){
 			.then((response)=>{
 				return response.json();
 			})
-			.then((data)=>{
-				data.forEach(Item =>{
+			.then((movieList)=>{
+				movieList.forEach(Item =>{
 					if(TmbdName === Item.name){
 						document.getElementById("unmark-"+TmbdId).style.display = "";
 						document.getElementById("mark-"+TmbdId).style.display = "none";
@@ -303,7 +303,7 @@ function ifItExists(TmbdId, TmbdName){
 					}
 				})
 				
-				if(data.length == 0){
+				if(movieList.length == 0){
 					document.getElementById("mark-"+TmbdId).style.display = "";
 					document.getElementById("unmark-"+TmbdId).style.display = "none";
 				}

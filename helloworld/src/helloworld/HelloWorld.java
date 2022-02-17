@@ -3,10 +3,40 @@ package helloworld;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 public class HelloWorld {
+	 public static void findTheBlank(int[] theNumbers) {
+
+         int sumOfAllNumbers = 0;
+
+         int sumOfNumbersPresent = 0;
+
+         int blankSpace = 0;
+
+
+
+         for (int i = 0; i < theNumbers.length; i++) {
+
+               sumOfAllNumbers += i + 1;
+
+             sumOfNumbersPresent += theNumbers[i];
+
+              if (theNumbers[i] == 0)
+
+             blankSpace = i;
+
+        }
+
+
+
+       System.out.println("Missing number = " + (sumOfAllNumbers - sumOfNumbersPresent) + " at location " + blankSpace +" of the array"); } 
 	
 	 public boolean isPalindrome(int x) {
 	        String num1 = String.valueOf(x);
@@ -23,25 +53,46 @@ public class HelloWorld {
 	       }
 	        
 	    }
+	 static void isAnagram(String a, String b) {
+	        String[] al = a.split("");
+	        String[] bl = b.split("");
+	        List<String> all = Arrays.asList(al);
+	        List<String> bll = Arrays.asList(bl);
+	        Collections.sort(all);
+	        Collections.sort(bll);
+	        
+	        if(all.equals(bll) == true){
+	            System.out.println("anagrams");
+	        }else{
+	        	System.out.println("not anagrams");
+	        }
+	    }
 	 public static void main(String[] args) {
-		 String s = "()";
-		       if(s.indexOf("(]" ) != 0 || s.indexOf("(]") == 0){
-		            System.out.println("False");
-		        }else if(s.indexOf("(}") != 0 || s.indexOf("(}") == 0){
-		            System.out.println("False");
-		        }else if(s.indexOf("[)") != 0 || s.indexOf("[)") == 0){
-		            System.out.println("False");
-		        }else if(s.indexOf("[}") != 0 || s.indexOf("[}") == 0){
-		            System.out.println("False");
-		        }else if(s.indexOf("{)") != 0 || s.indexOf("{)") == 0){
-		            System.out.println("False");
-		        }else if(s.indexOf("{]") != 0 || s.indexOf("{]") == 0){
-		            System.out.println("False");
-		        }else{
-		            System.out.println("True");
-		        }
+		 Scanner scan = new Scanner(System.in);
+		 System.out.println("first string: ");
+	     String a = scan.nextLine();
+	     System.out.println("second string: ");
+	     String b = scan.nextLine();
+	     scan.close();
+	     isAnagram(a, b);
+	      
 	 }//end of main
-	 
+	 public static int[] removeDuplicates(int[] nums) {
+	        Set<Integer> unique = new LinkedHashSet<>();
+	        
+	        for(int i = 0; i < nums.length; i++){
+	            unique.add(nums[i]);
+	        }
+	        List<Integer> uniqueList = new ArrayList<>(unique);
+	        
+	        nums = new int[uniqueList.size()];
+	        for(int i =0; i < nums.length; i++){
+	            nums[i] = uniqueList.get(i);w
+	        }
+	        
+	        
+	        return nums;
+	    }
 	 public static int romanToInt(String s) {
 	        Map<Character, Integer> romanNumerals = new HashMap<>();
 	        int answer = 0;

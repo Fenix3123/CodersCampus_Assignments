@@ -68,14 +68,17 @@ public class HelloWorld {
 	        }
 	    }
 	 public static void main(String[] args) {
-		 Scanner scan = new Scanner(System.in);
-		 System.out.println("first string: ");
-	     String a = scan.nextLine();
-	     System.out.println("second string: ");
-	     String b = scan.nextLine();
-	     scan.close();
-	     isAnagram(a, b);
-	      
+		int[] numbers = {1,3,0,2,2,4};
+		
+		int p = 0;
+		
+		for(int i = 1; i < numbers.length-1; i++) {
+			if(numbers[i] > numbers[i-1]) {
+				p = p+1;
+			}
+		}
+		
+		System.out.println(p);
 	 }//end of main
 	 public static int[] removeDuplicates(int[] nums) {
 	        Set<Integer> unique = new LinkedHashSet<>();
